@@ -87,11 +87,11 @@ class _SubscriptionFormPageState extends State<SubscriptionFormPage> {
             if (snapshot.hasError) {
               return _Problem(
                 message: 'Products couldn’t load.',
-                onRetry: () => setState(
-                  () => _products = widget.api.products(
+                onRetry: () => setState(() {
+                  _products = widget.api.products(
                     available: widget.existing == null ? true : null,
-                  ),
-                ),
+                  );
+                }),
               );
             }
             final products = snapshot.data ?? [];
