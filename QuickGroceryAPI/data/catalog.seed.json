@@ -1,0 +1,949 @@
+[
+  {
+    "id": "fresho_potato_1kg",
+    "name": "Potato · 1 kg",
+    "brand": "fresho!",
+    "category": "Vegetables",
+    "priceCents": 3700,
+    "description": "Fresh potatoes for everyday curries, sabzi and snacks.",
+    "stock": 24,
+    "unit": "1 kg",
+    "aliases": [
+      "batata",
+      "aloo",
+      "alu",
+      "potatoes",
+      "potato",
+      "urulai kilangu",
+      "bangaladumpa"
+    ],
+    "imageUrl": "https://www.bbassets.com/media/uploads/p/s/10000159_29-fresho-potato.jpg",
+    "sourceUrl": "https://www.bigbasket.com/pd/10000159/fresho-potato-1-kg/"
+  },
+  {
+    "id": "fresho_onion_1kg",
+    "name": "Onion · 1 kg",
+    "brand": "fresho!",
+    "category": "Vegetables",
+    "priceCents": 6600,
+    "description": "Everyday onions for Indian cooking.",
+    "stock": 20,
+    "unit": "1 kg",
+    "aliases": [
+      "pyaz",
+      "pyaaz",
+      "kanda",
+      "vengayam",
+      "onions"
+    ],
+    "imageUrl": "https://www.bbassets.com/media/uploads/p/s/10000148_35-fresho-onion.jpg",
+    "sourceUrl": "https://www.bigbasket.com/pd/10000148/fresho-onion-1-kg/"
+  },
+  {
+    "id": "fresho_tomato_1kg",
+    "name": "Tomato · 1 kg",
+    "brand": "fresho!",
+    "category": "Vegetables",
+    "priceCents": 4050,
+    "description": "Fresh hybrid tomatoes for curries, salads and sauces.",
+    "stock": 18,
+    "unit": "1 kg",
+    "aliases": [
+      "tamatar",
+      "tomatoes",
+      "thakkali",
+      "tomata"
+    ],
+    "imageUrl": "https://www.bbassets.com/media/uploads/p/s/50000557_11-fresho-tomato-hybrid-organically-grown.jpg",
+    "sourceUrl": "https://www.bigbasket.com/pd/50000557/fresho-tomato-hybrid-organically-grown-1-kg/"
+  },
+  {
+    "id": "fresho_coriander_100g",
+    "name": "Coriander Leaves · 100 g",
+    "brand": "fresho!",
+    "category": "Fresh Herbs",
+    "priceCents": 560,
+    "description": "Fresh coriander leaves without roots, a finishing herb for Indian dishes.",
+    "stock": 16,
+    "unit": "100 g",
+    "aliases": [
+      "dhaniya",
+      "dhania",
+      "kothimbir",
+      "kothamalli",
+      "cilantro",
+      "coriander",
+      "hara dhaniya"
+    ],
+    "imageUrl": "https://www.bbassets.com/media/uploads/p/s/10000097_23-fresho-coriander-leaves.jpg",
+    "sourceUrl": "https://www.bigbasket.com/pd/10000097/fresho-coriander-leaves-100-g/"
+  },
+  {
+    "id": "fresho_green_chilli_100g",
+    "name": "Green Chilli · 100 g",
+    "brand": "fresho!",
+    "category": "Fresh Herbs",
+    "priceCents": 1100,
+    "description": "Fresh green chillies for everyday seasoning.",
+    "stock": 14,
+    "unit": "100 g",
+    "aliases": [
+      "hari mirch",
+      "mirchi",
+      "green chili",
+      "green chillies",
+      "pachai milagai"
+    ],
+    "imageUrl": "https://www.bbassets.com/media/uploads/p/s/10000081_25-fresho-chilli-green-long-medium.jpg",
+    "sourceUrl": "https://www.bigbasket.com/pd/10000081/fresho-chilli-green-long-medium-100-g/"
+  },
+  {
+    "id": "fresho_banana_1kg",
+    "name": "Robusta Banana · 1 kg",
+    "brand": "fresho!",
+    "category": "Fruits",
+    "priceCents": 5900,
+    "description": "Robusta bananas, approximately 6–8 pieces per kilogram.",
+    "stock": 12,
+    "unit": "1 kg",
+    "aliases": [
+      "kela",
+      "yelakki",
+      "vazhai pazham",
+      "bananas",
+      "banana"
+    ],
+    "imageUrl": "https://www.bbassets.com/media/uploads/p/s/10000025_32-fresho-banana-robusta.jpg",
+    "sourceUrl": "https://www.bigbasket.com/pd/10000025/fresho-banana-robusta-1-kg/"
+  },
+  {
+    "id": "aashirvaad_atta_5kg",
+    "name": "Shudh Chakki Atta · 5 kg",
+    "brand": "Aashirvaad",
+    "category": "Atta, Rice & Dal",
+    "priceCents": 25900,
+    "description": "Whole wheat chakki atta for rotis, chapatis and parathas.",
+    "stock": 12,
+    "unit": "5 kg",
+    "aliases": [
+      "aata",
+      "atta",
+      "wheat flour",
+      "gehun ka atta",
+      "godhi hittu",
+      "chapati flour",
+      "roti flour"
+    ],
+    "imageUrl": "https://www.bbassets.com/media/uploads/p/s/40127506_10-aashirvaad-shudh-chakki-atta.jpg",
+    "sourceUrl": "https://www.bigbasket.com/pd/40127506/aashirvaad-shudh-chakki-atta-5-kg/"
+  },
+  {
+    "id": "fortune_basmati_rice_1kg",
+    "name": "Biryani Special Basmati Rice · 1 kg",
+    "brand": "Fortune",
+    "category": "Atta, Rice & Dal",
+    "priceCents": 24616,
+    "description": "Extra-long grain basmati rice for biryani and special meals.",
+    "stock": 10,
+    "unit": "1 kg",
+    "aliases": [
+      "chawal",
+      "chaawal",
+      "rice",
+      "akki",
+      "biyyam",
+      "basmati",
+      "biriyani rice"
+    ],
+    "imageUrl": "https://www.bbassets.com/media/uploads/p/s/70000479_8-fortune-biryani-special-basmati-rice-extra-long-grain-basmati-rice.jpg",
+    "sourceUrl": "https://www.bigbasket.com/pd/70000479/fortune-biryani-special-basmati-rice-extra-long-grain-basmati-rice-1-kg-pouch/"
+  },
+  {
+    "id": "tata_sampann_toor_dal_1kg",
+    "name": "Unpolished Toor Dal · 1 kg",
+    "brand": "Tata Sampann",
+    "category": "Atta, Rice & Dal",
+    "priceCents": 17400,
+    "description": "Unpolished toor dal, also known as arhar dal or pigeon pea split.",
+    "stock": 10,
+    "unit": "1 kg",
+    "aliases": [
+      "arhar dal",
+      "toor",
+      "tur dal",
+      "tuvar dal",
+      "togari bele",
+      "kandi pappu",
+      "pigeon pea",
+      "dal"
+    ],
+    "imageUrl": "https://www.bbassets.com/media/uploads/p/s/40000291_16-tata-sampann-unpolished-toor-dalarhar-dal.jpg",
+    "sourceUrl": "https://www.bigbasket.com/pd/40000291/tata-sampann-unpolished-toor-dalarhar-dal-1-kg-pouch/"
+  },
+  {
+    "id": "aashirvaad_salt_1kg",
+    "name": "Iodized Salt · 1 kg",
+    "brand": "Aashirvaad",
+    "category": "Cooking Essentials",
+    "priceCents": 2340,
+    "description": "Iodized salt for everyday cooking.",
+    "stock": 20,
+    "unit": "1 kg",
+    "aliases": [
+      "namak",
+      "uppu",
+      "salt",
+      "iodised salt"
+    ],
+    "imageUrl": "https://www.bbassets.com/media/uploads/p/s/236834_10-aashirvaad-salt-iodised.jpg",
+    "sourceUrl": "https://www.bigbasket.com/pd/236834/aashirvaad-salt-iodised-1-kg-pouch/"
+  },
+  {
+    "id": "saffola_gold_oil_910g",
+    "name": "Gold Rice Bran & Sunflower Oil · 910 g",
+    "brand": "Saffola",
+    "category": "Cooking Essentials",
+    "priceCents": 20416,
+    "description": "Saffola Gold multi-source cooking oil blend in a 910 g pouch.",
+    "stock": 9,
+    "unit": "910 g",
+    "aliases": [
+      "cooking oil",
+      "edible oil",
+      "sunflower oil",
+      "rice bran oil",
+      "tel",
+      "ennai",
+      "oil"
+    ],
+    "imageUrl": "https://www.bbassets.com/media/uploads/p/s/147491_12-saffola-gold-refined-cooking-oil-blended-rice-bran-sunflower-oil-helps-keeps-heart-healthy.jpg",
+    "sourceUrl": "https://www.bigbasket.com/pd/147491/saffola-gold-refined-cooking-oil-blended-rice-bran-sunflower-oil-helps-keeps-heart-healthy-1-l-pouch/"
+  },
+  {
+    "id": "amul_taaza_milk_1l",
+    "name": "Taaza Toned Milk · 1 L",
+    "brand": "Amul",
+    "category": "Dairy",
+    "priceCents": 7700,
+    "description": "Homogenised toned milk in a 1 litre Tetra Pak.",
+    "stock": 16,
+    "unit": "1 L",
+    "aliases": [
+      "doodh",
+      "paal",
+      "milk",
+      "toned milk"
+    ],
+    "imageUrl": "https://www.bbassets.com/media/uploads/p/s/306926_6-amul-homogenised-toned-milk.jpg",
+    "sourceUrl": "https://www.bigbasket.com/pd/306926/amul-homogenised-toned-milk-1-l-carton/"
+  },
+  {
+    "id": "amul_unsalted_butter_500g",
+    "name": "Unsalted Butter · 500 g",
+    "brand": "Amul",
+    "category": "Dairy",
+    "priceCents": 32000,
+    "description": "Amul unsalted butter in a 500 g carton.",
+    "stock": 8,
+    "unit": "500 g",
+    "aliases": [
+      "makhan",
+      "butter",
+      "unsalted butter"
+    ],
+    "imageUrl": "https://www.bbassets.com/media/uploads/p/s/40006899_9-amul-cooking-butter-unsalted.jpg",
+    "sourceUrl": "https://www.bigbasket.com/pd/40006899/amul-cooking-butter-unsalted-500-g-carton/"
+  },
+  {
+    "id": "parle_g_biscuits_800g",
+    "name": "Original Gluco Biscuits · 800 g",
+    "brand": "Parle-G",
+    "category": "Snacks & Biscuits",
+    "priceCents": 8400,
+    "description": "Parle-G glucose biscuits in an 800 g pouch.",
+    "stock": 15,
+    "unit": "800 g",
+    "aliases": [
+      "parle g",
+      "parle-g",
+      "glucose biscuit",
+      "biscuits",
+      "biscuit",
+      "cookies"
+    ],
+    "imageUrl": "https://www.bbassets.com/media/uploads/p/s/102102_5-parle-gluco-biscuits-parle-g.jpg",
+    "sourceUrl": "https://www.bigbasket.com/pd/102102/parle-gluco-biscuits-parle-g-800-g-pouch/"
+  },
+  {
+    "id": "tata_tea_premium_500g",
+    "name": "Premium Desh Ki Chai · 500 g",
+    "brand": "Tata Tea",
+    "category": "Tea & Coffee",
+    "priceCents": 22320,
+    "description": "Tata Tea Premium leaf tea for a strong everyday chai.",
+    "stock": 9,
+    "unit": "500 g",
+    "aliases": [
+      "chai",
+      "tea",
+      "black tea",
+      "tata tea"
+    ],
+    "imageUrl": "https://www.bbassets.com/media/uploads/p/s/264446_8-tata-tea-premium-tea.jpg",
+    "sourceUrl": "https://www.bigbasket.com/pd/264446/tata-tea-premium-tea-500-g/"
+  },
+  {
+    "id": "fresho_okra_500g",
+    "name": "Ladies’ Fingers · 500 g",
+    "brand": "fresho!",
+    "category": "Vegetables",
+    "priceCents": 2039,
+    "description": "Fresh okra for bhindi sabzi and curries.",
+    "stock": 20,
+    "unit": "500 g",
+    "aliases": [
+      "bhindi",
+      "bhendi",
+      "okra",
+      "lady finger",
+      "vendakkai"
+    ],
+    "imageUrl": "https://www.bbassets.com/media/uploads/p/s/10000144_15-fresho-ladies-finger.jpg",
+    "sourceUrl": "https://www.bigbasket.com/pd/10000144/fresho-ladies-finger-500-g/"
+  },
+  {
+    "id": "fresho_carrot_ooty_500g",
+    "name": "Carrot Ooty · 500 g",
+    "brand": "fresho!",
+    "category": "Vegetables",
+    "priceCents": 2111,
+    "description": "Ooty carrots for salads, snacks and everyday cooking.",
+    "stock": 20,
+    "unit": "500 g",
+    "aliases": [
+      "gajar",
+      "carrot",
+      "carrots",
+      "ooty carrot"
+    ],
+    "imageUrl": "https://www.bbassets.com/media/uploads/p/s/10000271_17-fresho-carrot-ooty.jpg",
+    "sourceUrl": "https://www.bigbasket.com/pd/10000271/fresho-carrot-ooty-500-g/"
+  },
+  {
+    "id": "fresho_capsicum_green_250g",
+    "name": "Capsicum Green · 250 g",
+    "brand": "fresho!",
+    "category": "Vegetables",
+    "priceCents": 1000,
+    "description": "Green capsicum for stir-fries, pulao and sandwiches.",
+    "stock": 18,
+    "unit": "250 g",
+    "aliases": [
+      "shimla mirch",
+      "capsicum",
+      "bell pepper"
+    ],
+    "imageUrl": "https://www.bbassets.com/media/uploads/p/s/10000068_26-fresho-capsicum-green.jpg",
+    "sourceUrl": "https://www.bigbasket.com/pd/10000068/fresho-capsicum-green-250-g/"
+  },
+  {
+    "id": "fresho_cauliflower_1pc",
+    "name": "Cauliflower · 1 pc",
+    "brand": "fresho!",
+    "category": "Vegetables",
+    "priceCents": 3250,
+    "description": "Fresh cauliflower for sabzi, paratha and roasting.",
+    "stock": 12,
+    "unit": "1 pc",
+    "aliases": [
+      "gobi",
+      "phool gobi",
+      "cauliflower"
+    ],
+    "imageUrl": "https://www.bbassets.com/media/uploads/p/s/10000074_22-fresho-cauliflower.jpg",
+    "sourceUrl": "https://www.bigbasket.com/pd/10000074/fresho-cauliflower-1-pc/"
+  },
+  {
+    "id": "fresho_brinjal_500g",
+    "name": "Brinjal Nagpur · 500 g",
+    "brand": "fresho!",
+    "category": "Vegetables",
+    "priceCents": 4300,
+    "description": "Nagpur brinjal for bharta and regional curries.",
+    "stock": 12,
+    "unit": "500 g",
+    "aliases": [
+      "baingan",
+      "vangi",
+      "brinjal",
+      "eggplant"
+    ],
+    "imageUrl": "https://www.bbassets.com/media/uploads/p/s/40125304_1-fresho-brinjal-nagpur-organically-grown.jpg",
+    "sourceUrl": "https://www.bigbasket.com/pd/40125304/fresho-brinjal-nagpur-organically-grown-500-g/"
+  },
+  {
+    "id": "fresho_palak_250g",
+    "name": "Palak Cleaned · 250 g",
+    "brand": "fresho!",
+    "category": "Vegetables",
+    "priceCents": 1400,
+    "description": "Cleaned spinach leaves for dal, saag and soups.",
+    "stock": 10,
+    "unit": "250 g",
+    "aliases": [
+      "palak",
+      "spinach",
+      "keerai",
+      "soppu"
+    ],
+    "imageUrl": "https://www.bbassets.com/media/uploads/p/s/20000979_14-fresho-palak-cleaned-without-roots.jpg",
+    "sourceUrl": "https://www.bigbasket.com/pd/20000979/fresho-palak-cleaned-without-roots-250-g/"
+  },
+  {
+    "id": "fresho_lemon_250g",
+    "name": "Lemon · 250 g",
+    "brand": "fresho!",
+    "category": "Vegetables",
+    "priceCents": 3500,
+    "description": "Fresh lemons for nimbu pani, dressings and cooking.",
+    "stock": 16,
+    "unit": "250 g",
+    "aliases": [
+      "nimbu",
+      "limbu",
+      "lemon",
+      "elumichai"
+    ],
+    "imageUrl": "https://www.bbassets.com/media/uploads/p/s/10000127_19-fresho-lemon.jpg",
+    "sourceUrl": "https://www.bigbasket.com/pd/10000127/fresho-lemon-250-g/"
+  },
+  {
+    "id": "fresho_apple_shimla_4pc",
+    "name": "Apple Shimla · 4 pcs",
+    "brand": "fresho!",
+    "category": "Fruits",
+    "priceCents": 13900,
+    "description": "Shimla apples, approximately 560–720 g per pack.",
+    "stock": 12,
+    "unit": "4 pcs",
+    "aliases": [
+      "seb",
+      "apple",
+      "apples",
+      "shimla apple"
+    ],
+    "imageUrl": "https://www.bbassets.com/media/uploads/p/s/40226801_11-fresho-apple-shimla.jpg",
+    "sourceUrl": "https://www.bigbasket.com/pd/40226801/fresho-apple-shimla-4-pcs/"
+  },
+  {
+    "id": "fresho_grapes_sharad_500g",
+    "name": "Grapes Sharad Seedless · 500 g",
+    "brand": "fresho!",
+    "category": "Fruits",
+    "priceCents": 9206,
+    "description": "Seedless Sharad grapes for snacking.",
+    "stock": 10,
+    "unit": "500 g",
+    "aliases": [
+      "angoor",
+      "grapes",
+      "draksha",
+      "seedless grapes"
+    ],
+    "imageUrl": "https://www.bbassets.com/media/uploads/p/s/10000295_23-fresho-grapes-sharad-seedless.jpg",
+    "sourceUrl": "https://www.bigbasket.com/pd/10000295/fresho-grapes-sharad-seedless-500-g/"
+  },
+  {
+    "id": "fresho_orange_nagpur_1kg",
+    "name": "Orange Nagpur · 1 kg",
+    "brand": "fresho!",
+    "category": "Fruits",
+    "priceCents": 17600,
+    "description": "Nagpur oranges for fresh snacking and juice.",
+    "stock": 10,
+    "unit": "1 kg",
+    "aliases": [
+      "santra",
+      "narangi",
+      "orange",
+      "oranges"
+    ],
+    "imageUrl": "https://www.bbassets.com/media/uploads/p/s/10000266_42-fresho-orange-nagpur-regular.jpg",
+    "sourceUrl": "https://www.bigbasket.com/pd/10000266/fresho-orange-nagpur-regular-1-kg/"
+  },
+  {
+    "id": "britannia_milk_bikis_150g",
+    "name": "Milk Bikis Biscuits · 150 g",
+    "brand": "Britannia",
+    "category": "Snacks & Biscuits",
+    "priceCents": 2940,
+    "description": "Milk biscuits for an everyday tea-time snack.",
+    "stock": 22,
+    "unit": "150 g",
+    "aliases": [
+      "milk bikis",
+      "bikis",
+      "milk biscuit",
+      "biscuits"
+    ],
+    "imageUrl": "https://www.bbassets.com/media/uploads/p/s/40023491_8-britannia-milk-bikis-biscuits.jpg",
+    "sourceUrl": "https://www.bigbasket.com/pd/40023491/britannia-milk-bikis-biscuits-150-g/"
+  },
+  {
+    "id": "britannia_bourbon_150g",
+    "name": "Bourbon Chocolate Cream Biscuits · 150 g",
+    "brand": "Britannia",
+    "category": "Snacks & Biscuits",
+    "priceCents": 3360,
+    "description": "Chocolate cream biscuits with a cocoa coating.",
+    "stock": 22,
+    "unit": "150 g",
+    "aliases": [
+      "bourbon",
+      "chocolate biscuit",
+      "cream biscuit",
+      "biscuits"
+    ],
+    "imageUrl": "https://www.bbassets.com/media/uploads/p/s/263593_31-britannia-bourbon-chocolate-cream-biscuits.jpg",
+    "sourceUrl": "https://www.bigbasket.com/pd/263593/britannia-bourbon-chocolate-cream-biscuits-150-g/"
+  },
+  {
+    "id": "britannia_nutrichoice_5grain_200g",
+    "name": "NutriChoice 5 Grain Digestive Biscuits · 200 g",
+    "brand": "Britannia",
+    "category": "Snacks & Biscuits",
+    "priceCents": 6100,
+    "description": "Multigrain digestive biscuits with fibre.",
+    "stock": 16,
+    "unit": "200 g",
+    "aliases": [
+      "digestive",
+      "multigrain biscuit",
+      "nutrichoice"
+    ],
+    "imageUrl": "https://www.bbassets.com/media/uploads/p/s/263575_17-britannia-nutrichoice-5-grain-digestive-high-fibre-multigrain-biscuits.jpg",
+    "sourceUrl": "https://www.bigbasket.com/pd/263575/britannia-nutrichoice-5-grain-digestive-high-fibre-multigrain-biscuits-200-g/"
+  },
+  {
+    "id": "sunfeast_veda_marie_250g",
+    "name": "Veda Marie Light Biscuits · 250 g",
+    "brand": "Sunfeast",
+    "category": "Snacks & Biscuits",
+    "priceCents": 4000,
+    "description": "Marie tea biscuits with tulsi, ginger, cardamom, ashwagandha and mulethi.",
+    "stock": 18,
+    "unit": "250 g",
+    "aliases": [
+      "marie",
+      "tea biscuit",
+      "veda marie",
+      "biscuits"
+    ],
+    "imageUrl": "https://www.bbassets.com/media/uploads/p/s/40186908_6-sunfeast-veda-marie-light-biscuits.jpg",
+    "sourceUrl": "https://www.bigbasket.com/pd/40186908/sunfeast-veda-marie-light-biscuits-250-g/"
+  },
+  {
+    "id": "oreo_choco_creme_125g",
+    "name": "Oreo Choco Creme Biscuits · 125.25 g",
+    "brand": "Cadbury Oreo",
+    "category": "Snacks & Biscuits",
+    "priceCents": 3255,
+    "description": "Chocolate sandwich biscuits with vanilla-flavoured creme.",
+    "stock": 20,
+    "unit": "125.25 g",
+    "aliases": [
+      "oreo",
+      "chocolate sandwich biscuit",
+      "cream biscuits"
+    ],
+    "imageUrl": "https://www.bbassets.com/media/uploads/p/s/100609530_46-cadbury-oreo-creme-biscuit-chocolate.jpg",
+    "sourceUrl": "https://www.bigbasket.com/pd/100609530/cadbury-oreo-creme-biscuit-chocolate-120-g/"
+  },
+  {
+    "id": "dark_fantasy_choco_chunks_75g",
+    "name": "Dark Fantasy Choco Chunks · 75 g",
+    "brand": "Sunfeast",
+    "category": "Snacks & Biscuits",
+    "priceCents": 6600,
+    "description": "Choco-chip cookies with a molten chocolate creme centre.",
+    "stock": 16,
+    "unit": "75 g",
+    "aliases": [
+      "dark fantasy",
+      "choco chunks",
+      "chocolate cookie",
+      "cookies"
+    ],
+    "imageUrl": "https://www.bbassets.com/media/uploads/p/s/40237159_10-sunfeast-dark-fantasy-choco-chunks-choco-chip-molten-choco-creme-filled-cookie.jpg",
+    "sourceUrl": "https://www.bigbasket.com/pd/40237159/sunfeast-dark-fantasy-choco-chunks-choco-chip-molten-choco-creme-filled-cookie-75-g-pouch/"
+  },
+  {
+    "id": "maggi_masala_70g",
+    "name": "2-Minute Masala Noodles · 70 g",
+    "brand": "Maggi",
+    "category": "Instant Noodles & Soup",
+    "priceCents": 1500,
+    "description": "Vegetarian masala instant noodles.",
+    "stock": 35,
+    "unit": "70 g",
+    "aliases": [
+      "maggi",
+      "masala noodles",
+      "instant noodles",
+      "noodles"
+    ],
+    "imageUrl": "https://www.bbassets.com/media/uploads/p/s/266160_33-maggi-masala-instant-noodles-vegetarian.jpg",
+    "sourceUrl": "https://www.bigbasket.com/pd/266160/maggi-masala-instant-noodles-vegetarian-70-g-pouch/"
+  },
+  {
+    "id": "maggi_veg_atta_435g",
+    "name": "Nutri-Licious Veg Atta Noodles · 435 g",
+    "brand": "Maggi",
+    "category": "Instant Noodles & Soup",
+    "priceCents": 16800,
+    "description": "Multi-pack of whole-wheat atta masala instant noodles.",
+    "stock": 14,
+    "unit": "435 g",
+    "aliases": [
+      "atta noodles",
+      "wheat noodles",
+      "maggi atta",
+      "instant noodles"
+    ],
+    "imageUrl": "https://www.bbassets.com/media/uploads/p/s/40183056_15-maggi-nutri-licious-veg-atta-masala-noodles.jpg",
+    "sourceUrl": "https://www.bigbasket.com/pd/40183056/maggi-nutri-licious-veg-atta-masala-noodles-435-g/"
+  },
+  {
+    "id": "maggi_double_masala_95g",
+    "name": "Double Masala Instant Noodles · 95 g",
+    "brand": "Maggi",
+    "category": "Instant Noodles & Soup",
+    "priceCents": 2000,
+    "description": "Instant noodles with extra masala seasoning.",
+    "stock": 25,
+    "unit": "95 g",
+    "aliases": [
+      "double masala",
+      "maggi",
+      "instant noodles",
+      "noodles"
+    ],
+    "imageUrl": "https://www.bbassets.com/media/uploads/p/s/40353468_3-maggi-double-masala-instant-noodles.jpg",
+    "sourceUrl": "https://www.bigbasket.com/pd/40353468/maggi-double-masala-instant-noodles-95-g/"
+  },
+  {
+    "id": "topramen_curry_280g",
+    "name": "Curry Veg Instant Noodles · 280 g",
+    "brand": "Top Ramen",
+    "category": "Instant Noodles & Soup",
+    "priceCents": 9785,
+    "description": "Vegetarian curry-flavour instant noodles.",
+    "stock": 16,
+    "unit": "280 g",
+    "aliases": [
+      "top ramen",
+      "curry noodles",
+      "instant noodles",
+      "noodles"
+    ],
+    "imageUrl": "https://www.bbassets.com/media/uploads/p/s/263515_3-top-ramen-noodles-curry-veg.jpg",
+    "sourceUrl": "https://www.bigbasket.com/pd/263515/top-ramen-noodles-curry-veg-280-g-pouch/"
+  },
+  {
+    "id": "knorr_mixed_veg_soup_40g",
+    "name": "Classic Mixed Vegetable Soup · 40 g",
+    "brand": "Knorr",
+    "category": "Instant Noodles & Soup",
+    "priceCents": 5800,
+    "description": "Instant mixed vegetable soup sachet.",
+    "stock": 18,
+    "unit": "40 g",
+    "aliases": [
+      "soup",
+      "vegetable soup",
+      "instant soup",
+      "knorr"
+    ],
+    "imageUrl": "https://www.bbassets.com/media/uploads/p/s/266557_20-knorr-classic-mixed-vegetable-soup.jpg",
+    "sourceUrl": "https://www.bigbasket.com/pd/266557/knorr-classic-mixed-vegetable-soup-45-g/"
+  },
+  {
+    "id": "mtr_vermicelli_850g",
+    "name": "Vermicelli · 850 g",
+    "brand": "MTR",
+    "category": "Pasta, Vermicelli & Noodles",
+    "priceCents": 6200,
+    "description": "Vermicelli for upma, kheer and payasam.",
+    "stock": 16,
+    "unit": "850 g",
+    "aliases": [
+      "seviyan",
+      "semiya",
+      "shemai",
+      "vermicelli",
+      "payasam"
+    ],
+    "imageUrl": "https://www.bbassets.com/media/uploads/p/s/265947_9-mtr-vermicelli.jpg",
+    "sourceUrl": "https://www.bigbasket.com/pd/265947/mtr-vermicelli-850-g-pouch/"
+  },
+  {
+    "id": "tata_moong_dal_1kg",
+    "name": "Unpolished Moong Dal · 1 kg",
+    "brand": "Tata Sampann",
+    "category": "Pulses & Lentils",
+    "priceCents": 17500,
+    "description": "Unpolished split moong dal for khichdi, dal and sprouts.",
+    "stock": 18,
+    "unit": "1 kg",
+    "aliases": [
+      "moong",
+      "mung",
+      "moong dal",
+      "mung dal",
+      "hesaru bele",
+      "green gram"
+    ],
+    "imageUrl": "https://www.bbassets.com/media/uploads/p/s/30002287_12-tata-sampann-unpolished-moong-dal.jpg",
+    "sourceUrl": "https://www.bigbasket.com/pd/30002287/tata-sampann-unpolished-moong-dal-1-kg-pouch/"
+  },
+  {
+    "id": "tata_chana_dal_1kg",
+    "name": "Unpolished Chana Dal · 1 kg",
+    "brand": "Tata Sampann",
+    "category": "Pulses & Lentils",
+    "priceCents": 12900,
+    "description": "Unpolished split Bengal gram for dals and snacks.",
+    "stock": 18,
+    "unit": "1 kg",
+    "aliases": [
+      "chana dal",
+      "chana",
+      "gram dal",
+      "kadala paruppu",
+      "bele"
+    ],
+    "imageUrl": "https://www.bbassets.com/media/uploads/p/s/40000290_12-tata-sampann-unpolished-chana-dal.jpg",
+    "sourceUrl": "https://www.bigbasket.com/pd/40000290/tata-sampann-unpolished-chana-dal-1-kg-pouch/"
+  },
+  {
+    "id": "tata_masoor_dal_1kg",
+    "name": "Unpolished Masoor Dal Whole · 1 kg",
+    "brand": "Tata Sampann",
+    "category": "Pulses & Lentils",
+    "priceCents": 15500,
+    "description": "Whole masoor lentils for dals, soups and curries.",
+    "stock": 18,
+    "unit": "1 kg",
+    "aliases": [
+      "masoor",
+      "masoor dal",
+      "whole red lentil",
+      "lentils"
+    ],
+    "imageUrl": "https://www.bbassets.com/media/uploads/p/s/30002286_10-tata-sampann-unpolished-masoor-dal-whole.jpg",
+    "sourceUrl": "https://www.bigbasket.com/pd/30002286/tata-sampann-unpolished-masoor-dal-whole-1-kg-pouch/"
+  },
+  {
+    "id": "tata_urad_split_1kg",
+    "name": "Unpolished Urad Dal Split · 1 kg",
+    "brand": "Tata Sampann",
+    "category": "Pulses & Lentils",
+    "priceCents": 25500,
+    "description": "Split urad dal for dals, idli and dosa batters.",
+    "stock": 16,
+    "unit": "1 kg",
+    "aliases": [
+      "urad",
+      "urad dal",
+      "uddina bele",
+      "black gram",
+      "ulundhu"
+    ],
+    "imageUrl": "https://www.bbassets.com/media/uploads/p/s/40017981_8-tata-sampann-unpolished-urad-dal-split.jpg",
+    "sourceUrl": "https://www.bigbasket.com/pd/40017981/tata-sampann-unpolished-urad-dal-split-1-kg/"
+  },
+  {
+    "id": "amul_ghee_1l",
+    "name": "Pure Ghee · 1 L",
+    "brand": "Amul",
+    "category": "Cooking Essentials",
+    "priceCents": 59000,
+    "description": "Amul pure ghee for cooking and serving.",
+    "stock": 10,
+    "unit": "1 L",
+    "aliases": [
+      "ghee",
+      "clarified butter",
+      "tup"
+    ],
+    "imageUrl": "https://www.bbassets.com/media/uploads/p/s/40050536_7-amul-ghee.jpg",
+    "sourceUrl": "https://www.bigbasket.com/pd/40050536/amul-ghee-1-l-pouch/"
+  },
+  {
+    "id": "amul_paneer_200g",
+    "name": "Malai Paneer · 200 g",
+    "brand": "Amul",
+    "category": "Dairy",
+    "priceCents": 9900,
+    "description": "Soft malai paneer for curries, tikka and bhurji.",
+    "stock": 16,
+    "unit": "200 g",
+    "aliases": [
+      "paneer",
+      "cottage cheese",
+      "panir"
+    ],
+    "imageUrl": "https://www.bbassets.com/media/uploads/p/s/279588_7-amul-malai-paneer.jpg",
+    "sourceUrl": "https://www.bigbasket.com/pd/279588/amul-malai-paneer-200-g-pouch/"
+  },
+  {
+    "id": "britannia_little_hearts_30g",
+    "name": "Little Hearts Classic Crunch Biscuits · 30.1 g",
+    "brand": "Britannia",
+    "category": "Snacks & Biscuits",
+    "priceCents": 1000,
+    "description": "Classic sugar-sprinkled heart-shaped crunchy biscuits.",
+    "stock": 22,
+    "unit": "30.1 g",
+    "aliases": [
+      "little hearts",
+      "heart biscuits",
+      "sugar biscuits",
+      "britannia"
+    ],
+    "imageUrl": "https://www.bbassets.com/media/uploads/p/s/100012372_25-britannia-little-hearts-classic-sugar-sprinkled-heart-shaped-biscuits.jpg",
+    "sourceUrl": "https://www.bigbasket.com/pd/100012372/britannia-little-hearts-classic-sugar-sprinkled-heart-shaped-biscuits-32-g/"
+  },
+  {
+    "id": "parle_krackjack_butter_masala_120g",
+    "name": "Krackjack Butter Masala Biscuits · 102.6 g",
+    "brand": "Parle",
+    "category": "Snacks & Biscuits",
+    "priceCents": 2520,
+    "description": "Sweet and salty butter-masala cracker biscuits.",
+    "stock": 20,
+    "unit": "102.6 g",
+    "aliases": [
+      "krackjack",
+      "krack jack",
+      "sweet salty biscuit",
+      "butter masala biscuit",
+      "parle"
+    ],
+    "imageUrl": "https://www.bbassets.com/media/uploads/p/s/40129521_10-parle-krackjack-biscuits-butter-masala.jpg",
+    "sourceUrl": "https://www.bigbasket.com/pd/40129521/parle-krackjack-biscuits-butter-masala-120-g/"
+  },
+  {
+    "id": "parle_krackjack_original_176g",
+    "name": "Krack Jack Original Sweet & Salty Biscuits · 176.4 g",
+    "brand": "Parle",
+    "category": "Snacks & Biscuits",
+    "priceCents": 3500,
+    "description": "Original sweet and salty cracker biscuits.",
+    "stock": 20,
+    "unit": "176.4 g",
+    "aliases": [
+      "krackjack",
+      "krack jack",
+      "sweet salty biscuit",
+      "salted biscuits",
+      "parle"
+    ],
+    "imageUrl": "https://www.bbassets.com/media/uploads/p/s/102569_7-parle-krackjack-biscuits.jpg",
+    "sourceUrl": "https://www.bigbasket.com/pd/102569/parle-krackjack-biscuits-200-g-pouch/"
+  },
+  {
+    "id": "britannia_marie_gold_250g",
+    "name": "Marie Gold Biscuits · 250 g",
+    "brand": "Britannia",
+    "category": "Snacks & Biscuits",
+    "priceCents": 3840,
+    "description": "Light crisp tea-time biscuits.",
+    "stock": 20,
+    "unit": "250 g",
+    "aliases": [
+      "marie",
+      "marie gold",
+      "tea biscuit",
+      "britannia"
+    ],
+    "imageUrl": "https://www.bbassets.com/media/uploads/p/s/220244_10-britannia-marie-gold-biscuits.jpg",
+    "sourceUrl": "https://www.bigbasket.com/pd/220244/britannia-marie-gold-biscuits-250-g/"
+  },
+  {
+    "id": "parle_hide_seek_strawberry_100g",
+    "name": "Hide & Seek Strawberry Creme Biscuits · 100 g",
+    "brand": "Parle",
+    "category": "Snacks & Biscuits",
+    "priceCents": 3320,
+    "description": "Strawberry creme sandwich biscuits with chocolate chips.",
+    "stock": 15,
+    "unit": "100 g",
+    "aliases": [
+      "hide and seek",
+      "hide seek",
+      "strawberry biscuit",
+      "creme biscuit",
+      "parle"
+    ],
+    "imageUrl": "https://www.bbassets.com/media/uploads/p/s/100566753_10-parle-hide-seek-strawberry-creme.jpg",
+    "sourceUrl": "https://www.bigbasket.com/pd/100566753/parle-hide-seek-strawberry-creme-120-g-pouch/"
+  },
+  {
+    "id": "parle_hide_seek_black_bourbon_choco_100g",
+    "name": "Hide & Seek Black Bourbon Choco Creme · 100 g",
+    "brand": "Parle",
+    "category": "Snacks & Biscuits",
+    "priceCents": 3000,
+    "description": "Chocolate creme sandwich biscuits.",
+    "stock": 15,
+    "unit": "100 g",
+    "aliases": [
+      "hide and seek",
+      "hide seek",
+      "black bourbon",
+      "chocolate creme biscuit",
+      "parle"
+    ],
+    "imageUrl": "https://www.bbassets.com/media/uploads/p/s/40005875_7-parle-hide-seek-black-bourbon-choco.jpg",
+    "sourceUrl": "https://www.bigbasket.com/pd/40005875/parle-hide-seek-black-bourbon-choco-100-g-pouch/"
+  },
+  {
+    "id": "parle_hide_seek_black_bourbon_vanilla_100g",
+    "name": "Hide & Seek Black Bourbon Vanilla Creme · 100 g",
+    "brand": "Parle",
+    "category": "Snacks & Biscuits",
+    "priceCents": 4000,
+    "description": "Vanilla creme sandwich biscuits with dark cocoa biscuits.",
+    "stock": 15,
+    "unit": "100 g",
+    "aliases": [
+      "hide and seek",
+      "hide seek",
+      "black bourbon",
+      "vanilla creme biscuit",
+      "parle"
+    ],
+    "imageUrl": "https://www.bbassets.com/media/uploads/p/s/40007120_5-parle-hide-seek-black-bourbon-vanilla.jpg",
+    "sourceUrl": "https://www.bigbasket.com/pd/40007120/parle-hide-seek-black-bourbon-vanilla-100-g-pouch/"
+  },
+  {
+    "id": "parle_hide_seek_orange_100g",
+    "name": "Hide & Seek Orange Creme Biscuits · 100 g",
+    "brand": "Parle",
+    "category": "Snacks & Biscuits",
+    "priceCents": 3320,
+    "description": "Orange creme sandwich biscuits with chocolate chips.",
+    "stock": 15,
+    "unit": "100 g",
+    "aliases": [
+      "hide and seek",
+      "hide seek",
+      "orange biscuit",
+      "creme biscuit",
+      "parle"
+    ],
+    "imageUrl": "https://www.bbassets.com/media/uploads/p/s/100566751_10-parle-creams-hide-seek-creme-orange.jpg",
+    "sourceUrl": "https://www.bigbasket.com/pd/100566751/parle-creams-hide-seek-creme-orange-120-g-pouch/"
+  }
+]
