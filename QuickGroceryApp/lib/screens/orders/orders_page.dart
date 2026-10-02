@@ -15,7 +15,11 @@ class _OrdersPageState extends State<OrdersPage> {
     _orders = widget.api.orders();
   }
 
-  void _retry() => setState(() => _orders = widget.api.orders());
+  void _retry() {
+    setState(() {
+      _orders = widget.api.orders();
+    });
+  }
   @override
   Widget build(BuildContext context) => FutureBuilder<List<GroceryOrder>>(
     future: _orders,

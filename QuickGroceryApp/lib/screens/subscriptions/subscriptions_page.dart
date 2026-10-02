@@ -15,7 +15,11 @@ class _SubscriptionsPageState extends State<SubscriptionsPage> {
     _subscriptions = widget.api.subscriptions();
   }
 
-  void _reload() => setState(() => _subscriptions = widget.api.subscriptions());
+  void _reload() {
+    setState(() {
+      _subscriptions = widget.api.subscriptions();
+    });
+  }
   Future<void> _edit([GrocerySubscription? subscription]) async {
     final saved = await Navigator.push<bool>(
       context,

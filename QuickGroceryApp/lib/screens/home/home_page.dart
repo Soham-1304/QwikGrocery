@@ -23,7 +23,9 @@ class _HomePageState extends State<HomePage> {
   }
 
   void _retry() =>
-      setState(() => _products = widget.api.products(available: true));
+      setState(() {
+        _products = widget.api.products(available: true);
+      });
 
   @override
   Widget build(BuildContext context) => RefreshIndicator(

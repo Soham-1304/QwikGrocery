@@ -23,7 +23,11 @@ class _TrackingPageState extends State<TrackingPage> {
     _order = widget.api.order(widget.order.id);
   }
 
-  void _refresh() => setState(() => _order = widget.api.order(widget.order.id));
+  void _refresh() {
+    setState(() {
+      _order = widget.api.order(widget.order.id);
+    });
+  }
   @override
   Widget build(BuildContext context) => Scaffold(
     appBar: AppBar(

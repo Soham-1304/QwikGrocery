@@ -18,6 +18,7 @@ class ProductImage extends StatelessWidget {
             url,
             fit: BoxFit.cover,
             width: double.infinity,
+            filterQuality: FilterQuality.high,
             errorBuilder: (_, _, _) => const Center(
               child: Icon(Icons.broken_image_outlined, color: _green, size: 34),
             ),

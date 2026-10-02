@@ -5,7 +5,7 @@ QuickGrocery is split into two independent projects:
 - `QuickGroceryApp` is the Flutter customer app for Android, iOS, and web.
 - `QuickGroceryAPI` is the Express API. Flutter uses Firebase Authentication directly; Express verifies Firebase ID tokens with the Admin SDK and is the only application service that accesses Firestore.
 
-The Firestore `products` collection is seeded with 51 sourced Indian grocery listings across 11 categories, including 10 vegetables, four fruits, 15 biscuit/snack choices, instant noodles and soup, pulses and lentils, and everyday staples, with product photos, brands, pack sizes, retailer source links, and regional search aliases. Prices are retailer listing snapshots checked on 2026-10-02 and may vary by date and location. Starting stock counts are explicitly demo inventory and must be replaced with live inventory before accepting real orders. The catalog seed does not create customer accounts, orders, or delivery events.
+The Firestore `products` collection is seeded with 56 sourced Indian grocery listings across 13 categories, including vegetables, fruits, 15 biscuit/snack choices, instant noodles and soup, pulses and lentils, dahi, milk, bread, and eggs, with large product photos, brands, pack sizes, retailer source links, and regional search aliases. Prices are retailer listing snapshots checked on 2026-10-02 and may vary by date and location. Starting stock counts are explicitly demo inventory and must be replaced with live inventory before accepting real orders. The catalog seed does not create customer accounts, orders, or delivery events.
 
 ## Project layout
 

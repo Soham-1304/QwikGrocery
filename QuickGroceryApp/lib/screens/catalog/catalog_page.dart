@@ -40,7 +40,11 @@ class _CatalogPageState extends State<CatalogPage> {
     );
   }
 
-  void _refresh() => setState(() => _products = _load());
+  void _refresh() {
+    setState(() {
+      _products = _load();
+    });
+  }
   void _searchChanged(String _) {
     _debounce?.cancel();
     _debounce = Timer(const Duration(milliseconds: 280), _refresh);
