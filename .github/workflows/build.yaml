@@ -6,6 +6,11 @@ on:
   pull_request:
     branches: [ main ]
   workflow_dispatch:
+    inputs:
+      api_base_url:
+        description: 'Backend API URL (e.g. https://your-app.onrender.com/api)'
+        required: false
+        default: ''
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -45,11 +50,23 @@ jobs:
       - name: Verify Code Quality (Analyze)
         run: flutter analyze
 
+      - name: Determine Target API URL
+        id: api_config
+        run: |
+          URL="${{ github.event.inputs.api_base_url || vars.API_BASE_URL || secrets.API_BASE_URL }}"
+          if [ -n "$URL" ]; then
+            echo "Using API URL: $URL"
+            echo "DART_DEFINE=--dart-define=API_BASE_URL=$URL" >> $GITHUB_ENV
+          else
+            echo "No custom API URL specified, using app default."
+            echo "DART_DEFINE=" >> $GITHUB_ENV
+          fi
+
       - name: Build Android Release APK
-        run: flutter build apk --release
+        run: flutter build apk --release ${{ env.DART_DEFINE }}
 
       - name: Build Android Release App Bundle (AAB)
-        run: flutter build appbundle --release
+        run: flutter build appbundle --release ${{ env.DART_DEFINE }}
 
       - name: Upload Release APK
         uses: actions/upload-artifact@v4
