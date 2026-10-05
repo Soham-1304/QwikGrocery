@@ -21,7 +21,9 @@ The system is organized into two independent sub-projects:
    - Verified bearer authentication via Firebase ID tokens.
    - Atomic Firestore transactions for stock validation, cart checkout, wallet debits, and scheduled orders.
    - Background lifecycle runner advancing orders through:
-     $$\text{placed} \xrightarrow{\text{4s}} \text{confirmed} \xrightarrow{\text{6s}} \text{preparing} \xrightarrow{\text{6s}} \text{out\_for\_delivery} \xrightarrow{\text{12s}} \text{delivered}$$
+     ```text
+     placed ──(4s)──> confirmed ──(6s)──> preparing ──(6s)──> out_for_delivery ──(12s)──> delivered
+     ```
    - Background scheduler processing active recurring subscriptions every 30 seconds.
 
 ---
