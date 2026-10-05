@@ -33,11 +33,11 @@ class DefaultFirebaseOptions {
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyDjT-x7Q5uIBDVkDBp24T3LHmDt-_KRSR8',
+    apiKey: 'AIzaSyCOuZRExCPEK5NrcSdp51MRIpstfrgEhyY',
     projectId: 'qwikgrocery-22631',
     storageBucket: 'qwikgrocery-22631.firebasestorage.app',
     messagingSenderId: '563192241880',
-    appId: '1:563192241880:android:ea3bfc5e90294d20f801ad',
+    appId: '1:563192241880:android:9095d7413e8a645cf801ad',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(

@@ -70,7 +70,11 @@ class SessionController extends ChangeNotifier {
         return;
       }
 
-      final googleUser = await GoogleSignIn().signIn();
+      final googleSignIn = GoogleSignIn(
+        serverClientId:
+            '563192241880-arpuhe79sg5mke4rkkf7miah9skicukt.apps.googleusercontent.com',
+      );
+      final googleUser = await googleSignIn.signIn();
       if (googleUser == null) return;
       final googleAuth = await googleUser.authentication;
       final credential = GoogleAuthProvider.credential(
