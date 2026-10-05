@@ -14,6 +14,7 @@ app.use(cors({
   origin: true,
   credentials: true,
 }));
+app.options('*', cors());
 app.use(express.json({ limit: '64kb' }));
 app.get('/api/health', (_req, res) => res.json({ status: 'ok' }));
 app.use('/api/products', productRouter);
