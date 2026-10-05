@@ -81,10 +81,13 @@ class SessionController extends ChangeNotifier {
     } on FirebaseAuthException catch (error) {
       throw ApiException(_messageFor(error), statusCode: _statusFor(error));
     } catch (error) {
+      final msg = error.toString();
       throw ApiException(
-        error is Exception
-            ? 'Google sign-in could not be completed. Check the Firebase Google provider configuration.'
-            : 'Google sign-in could not be completed.',
+        msg.contains('ApiException: 10') || msg.contains('sign_in_failed')
+            ? 'Google Sign-In on Android requires registering SHA-1 in Firebase Console. Please sign in with Email & Password or add your SHA-1.'
+            : (error is Exception
+                ? error.toString().replaceAll('Exception: ', '')
+                : 'Google sign-in could not be completed.'),
       );
     }
   }

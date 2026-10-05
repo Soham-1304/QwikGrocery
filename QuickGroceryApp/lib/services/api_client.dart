@@ -14,7 +14,7 @@ class ApiClient {
   final http.Client _client;
   static const _baseUrl = String.fromEnvironment(
     'API_BASE_URL',
-    defaultValue: 'http://localhost:4000/api',
+    defaultValue: 'https://qwikgrocery.onrender.com/api',
   );
 
   Uri _uri(String path, [Map<String, String>? query]) =>

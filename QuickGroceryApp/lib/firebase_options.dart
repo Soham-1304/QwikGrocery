@@ -12,11 +12,12 @@ class DefaultFirebaseOptions {
 
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
+        return android;
       case TargetPlatform.iOS:
+        return ios;
       case TargetPlatform.macOS:
       case TargetPlatform.windows:
       case TargetPlatform.linux:
-        return web;
       case TargetPlatform.fuchsia:
         return web;
     }
@@ -29,5 +30,22 @@ class DefaultFirebaseOptions {
     storageBucket: 'qwikgrocery-22631.firebasestorage.app',
     messagingSenderId: '563192241880',
     appId: '1:563192241880:web:ea3bfc5e90294d20f801ad',
+  );
+
+  static const FirebaseOptions android = FirebaseOptions(
+    apiKey: 'AIzaSyDjT-x7Q5uIBDVkDBp24T3LHmDt-_KRSR8',
+    projectId: 'qwikgrocery-22631',
+    storageBucket: 'qwikgrocery-22631.firebasestorage.app',
+    messagingSenderId: '563192241880',
+    appId: '1:563192241880:android:ea3bfc5e90294d20f801ad',
+  );
+
+  static const FirebaseOptions ios = FirebaseOptions(
+    apiKey: 'AIzaSyDjT-x7Q5uIBDVkDBp24T3LHmDt-_KRSR8',
+    projectId: 'qwikgrocery-22631',
+    storageBucket: 'qwikgrocery-22631.firebasestorage.app',
+    messagingSenderId: '563192241880',
+    appId: '1:563192241880:ios:ea3bfc5e90294d20f801ad',
+    iosBundleId: 'com.qwikgrocery.app',
   );
 }

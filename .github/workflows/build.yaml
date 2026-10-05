@@ -8,9 +8,9 @@ on:
   workflow_dispatch:
     inputs:
       api_base_url:
-        description: 'Backend API URL (e.g. https://your-app.onrender.com/api)'
+        description: 'Backend API URL'
         required: false
-        default: ''
+        default: 'https://qwikgrocery.onrender.com/api'
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -53,14 +53,9 @@ jobs:
       - name: Determine Target API URL
         id: api_config
         run: |
-          URL="${{ github.event.inputs.api_base_url || vars.API_BASE_URL || secrets.API_BASE_URL }}"
-          if [ -n "$URL" ]; then
-            echo "Using API URL: $URL"
-            echo "DART_DEFINE=--dart-define=API_BASE_URL=$URL" >> $GITHUB_ENV
-          else
-            echo "No custom API URL specified, using app default."
-            echo "DART_DEFINE=" >> $GITHUB_ENV
-          fi
+          URL="${{ github.event.inputs.api_base_url || vars.API_BASE_URL || secrets.API_BASE_URL || 'https://qwikgrocery.onrender.com/api' }}"
+          echo "Using API URL: $URL"
+          echo "DART_DEFINE=--dart-define=API_BASE_URL=$URL" >> $GITHUB_ENV
 
       - name: Build Android Release APK
         run: flutter build apk --release ${{ env.DART_DEFINE }}
