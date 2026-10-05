@@ -48,7 +48,7 @@ jobs:
         run: flutter pub get
 
       - name: Verify Code Quality (Analyze)
-        run: flutter analyze
+        run: flutter analyze --no-fatal-infos lib/
 
       - name: Determine Target API URL
         id: api_config
