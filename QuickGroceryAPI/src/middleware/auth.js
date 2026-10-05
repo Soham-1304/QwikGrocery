@@ -2,6 +2,7 @@ import { getAuth } from 'firebase-admin/auth';
 import { fail } from '../utils/http.js';
 
 export async function requireUser(req, _res, next) {
+  if (req.method === 'OPTIONS') return next();
   try {
     const match = /^Bearer\s+(.+)$/i.exec(req.get('authorization') || '');
     if (!match) throw fail(401, 'Sign in to continue.');

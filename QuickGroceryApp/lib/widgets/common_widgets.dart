@@ -1,8 +1,19 @@
-part of '../ui.dart';
+import 'package:flutter/material.dart';
+
+export '../core/utils/currency_formatter.dart' show money, CurrencyFormatter;
+import '../core/theme/app_colors.dart';
+import '../core/utils/currency_formatter.dart';
+
+const _green = AppColors.oldGreen;
+const _yellow = AppColors.oldYellow;
+const _black = AppColors.black;
+const _muted = AppColors.muted;
+const _paleYellow = AppColors.paleYellow;
 
 class ProductImage extends StatelessWidget {
   const ProductImage({super.key, required this.url});
   final String url;
+
   @override
   Widget build(BuildContext context) => ColoredBox(
     color: _paleYellow,
@@ -26,8 +37,9 @@ class ProductImage extends StatelessWidget {
   );
 }
 
-class _BrandMark extends StatelessWidget {
-  const _BrandMark();
+class BrandMark extends StatelessWidget {
+  const BrandMark({super.key});
+
   @override
   Widget build(BuildContext context) => const Row(
     mainAxisSize: MainAxisSize.min,
@@ -39,7 +51,7 @@ class _BrandMark extends StatelessWidget {
       ),
       SizedBox(width: 8),
       Text(
-        'QuickGrocery',
+        'QwikGrocery',
         style: TextStyle(
           fontSize: 19,
           color: _black,
@@ -51,15 +63,18 @@ class _BrandMark extends StatelessWidget {
   );
 }
 
-class _MoneyRow extends StatelessWidget {
-  const _MoneyRow({
+class MoneyRow extends StatelessWidget {
+  const MoneyRow({
+    super.key,
     required this.label,
     required this.cents,
     this.bold = false,
   });
+
   final String label;
   final int cents;
   final bool bold;
+
   @override
   Widget build(BuildContext context) => Padding(
     padding: const EdgeInsets.symmetric(vertical: 4),
@@ -84,10 +99,11 @@ class _MoneyRow extends StatelessWidget {
   );
 }
 
-class _Problem extends StatelessWidget {
-  const _Problem({required this.message, required this.onRetry});
+class Problem extends StatelessWidget {
+  const Problem({super.key, required this.message, required this.onRetry});
   final String message;
   final VoidCallback onRetry;
+
   @override
   Widget build(BuildContext context) => Center(
     child: Padding(
@@ -110,17 +126,20 @@ class _Problem extends StatelessWidget {
   );
 }
 
-class _EmptyState extends StatelessWidget {
-  const _EmptyState({
+class EmptyState extends StatelessWidget {
+  const EmptyState({
+    super.key,
     required this.icon,
     required this.title,
     required this.detail,
     this.action,
   });
+
   final IconData icon;
   final String title;
   final String detail;
   final Widget? action;
+
   @override
   Widget build(BuildContext context) => Center(
     child: Padding(
@@ -140,14 +159,14 @@ class _EmptyState extends StatelessWidget {
             textAlign: TextAlign.center,
             style: const TextStyle(color: _muted),
           ),
-          ?action,
+          if (action != null) action!,
         ],
       ),
     ),
   );
 }
 
-String _statusLabel(String status) => switch (status) {
+String statusLabel(String status) => switch (status) {
   'placed' => 'Order placed',
   'confirmed' => 'Confirmed',
   'preparing' => 'Preparing',

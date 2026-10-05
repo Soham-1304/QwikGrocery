@@ -2,7 +2,7 @@ import 'package:firebase_core/firebase_core.dart' show FirebaseOptions;
 import 'package:flutter/foundation.dart'
     show defaultTargetPlatform, kIsWeb, TargetPlatform;
 
-/// Firebase app configuration for the QuickGrocery Firebase project.
+/// Firebase app configuration for the QwikGrocery Firebase project.
 ///
 /// The provided configuration is for the registered web app. Add native app
 /// registrations in Firebase Console before shipping Android or iOS builds.

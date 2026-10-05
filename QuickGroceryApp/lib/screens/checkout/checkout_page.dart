@@ -1,9 +1,21 @@
-part of '../../ui.dart';
+import 'package:flutter/material.dart';
+
+import '../../models.dart';
+import '../../services/api_client.dart';
+import '../../services/api_exception.dart';
+import '../../state/cart_controller.dart';
+import '../../widgets/common_widgets.dart';
+import '../profile/profile_page.dart';
+import '../wallet/wallet_page.dart';
+import 'order_confirmation_page.dart';
+import 'widgets/checkout_delivery_form.dart';
+import 'widgets/payment_method_selector.dart';
 
 class CheckoutPage extends StatefulWidget {
   const CheckoutPage({super.key, required this.api, required this.cart});
   final ApiClient api;
-  final CartStore cart;
+  final CartController cart;
+
   @override
   State<CheckoutPage> createState() => _CheckoutPageState();
 }
@@ -13,8 +25,51 @@ class _CheckoutPageState extends State<CheckoutPage> {
   final _name = TextEditingController();
   final _phone = TextEditingController();
   final _address = TextEditingController();
+  CustomerProfile? _profile;
+  WalletSummary? _wallet;
+  SavedAddress? _selectedAddress;
+  String? _selectedPaymentId = 'wallet';
   bool _busy = false;
+  bool _loading = true;
   String? _error;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadProfile();
+  }
+
+  Future<void> _loadProfile() async {
+    try {
+      final data = await Future.wait([
+        widget.api.profile(),
+        widget.api.wallet(),
+      ]);
+      final profile = data[0] as CustomerProfile;
+      if (!mounted) return;
+      setState(() {
+        _profile = profile;
+        _wallet = data[1] as WalletSummary;
+        if (profile.addresses.isNotEmpty) {
+          _selectedAddress = profile.addresses.first;
+          _name.text = profile.addresses.first.recipientName;
+          _phone.text = profile.addresses.first.phone;
+          _address.text = profile.addresses.first.formatted;
+        } else {
+          _name.text = profile.name;
+        }
+        _loading = false;
+      });
+    } catch (error) {
+      if (mounted) {
+        setState(() {
+          _loading = false;
+          _error = 'Could not load your saved details. Open Profile and retry.';
+        });
+      }
+    }
+  }
+
   Future<void> _placeOrder() async {
     if (!_form.currentState!.validate()) return;
     setState(() {
@@ -23,10 +78,12 @@ class _CheckoutPageState extends State<CheckoutPage> {
     });
     try {
       final order = await widget.api.createOrder(
-        items: widget.cart.items,
+        items: widget.cart.cartLines,
         name: _name.text,
         phone: _phone.text,
         address: _address.text,
+        paymentMethodId: _selectedPaymentId,
+        addressId: _selectedAddress?.id,
       );
       widget.cart.clear();
       if (!mounted) return;
@@ -65,52 +122,49 @@ class _CheckoutPageState extends State<CheckoutPage> {
         child: ListView(
           padding: const EdgeInsets.all(20),
           children: [
-            Text(
-              'Delivery details',
-              style: Theme.of(context).textTheme.titleLarge
-                  ?.copyWith(fontWeight: FontWeight.w700),
-            ),
-            const SizedBox(height: 16),
-            Form(
-              key: _form,
-              child: Column(
-                children: [
-                  TextFormField(
-                    controller: _name,
-                    textCapitalization: TextCapitalization.words,
-                    decoration: const InputDecoration(labelText: 'Full name'),
-                    validator: (v) => v == null || v.trim().length < 2
-                        ? 'Enter your name'
-                        : null,
-                  ),
-                  const SizedBox(height: 12),
-                  TextFormField(
-                    controller: _phone,
-                    keyboardType: TextInputType.phone,
-                    decoration: const InputDecoration(
-                      labelText: 'Phone number',
-                    ),
-                    validator: (v) =>
-                        v == null || v.replaceAll(RegExp(r'\D'), '').length < 8
-                        ? 'Enter a valid phone number'
-                        : null,
-                  ),
-                  const SizedBox(height: 12),
-                  TextFormField(
-                    controller: _address,
-                    minLines: 2,
-                    maxLines: 4,
-                    decoration: const InputDecoration(
-                      labelText: 'Delivery address',
-                    ),
-                    validator: (v) => v == null || v.trim().length < 8
-                        ? 'Enter a complete delivery address'
-                        : null,
-                  ),
-                ],
-              ),
+            if (_loading) const LinearProgressIndicator(),
+            CheckoutDeliveryForm(
+              formKey: _form,
+              nameController: _name,
+              phoneController: _phone,
+              addressController: _address,
+              profile: _profile,
+              selectedAddress: _selectedAddress,
+              onSelectAddress: (address) => setState(() {
+                _selectedAddress = address;
+                if (address != null) {
+                  _name.text = address.recipientName;
+                  _phone.text = address.phone;
+                  _address.text = address.formatted;
+                }
+              }),
+              onManageAddresses: () async {
+                await Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => ProfilePage(api: widget.api)),
+                );
+                await _loadProfile();
+              },
             ),
             const SizedBox(height: 22),
+            PaymentMethodSelector(
+              selectedPaymentId: _selectedPaymentId,
+              wallet: _wallet,
+              paymentMethods: _profile?.paymentMethods ?? const [],
+              onChanged: (value) => setState(() => _selectedPaymentId = value),
+              onOpenWallet: () => Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => WalletPage(api: widget.api)),
+              ),
+              onAddPayment: () async {
+                await Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => ProfilePage(api: widget.api)),
+                );
+                await _loadProfile();
+              },
+            ),
+            const SizedBox(height: 14),
             Card(
               child: Padding(
                 padding: const EdgeInsets.all(16),
@@ -122,14 +176,14 @@ class _CheckoutPageState extends State<CheckoutPage> {
                           ?.copyWith(fontWeight: FontWeight.w700),
                     ),
                     const SizedBox(height: 12),
-                    ...widget.cart.items.map(
-                      (line) => _MoneyRow(
+                    ...widget.cart.itemsList.map(
+                      (line) => MoneyRow(
                         label: '${line.quantity} × ${line.product.name}',
                         cents: line.totalCents,
                       ),
                     ),
                     const Divider(height: 22),
-                    _MoneyRow(
+                    MoneyRow(
                       label: 'Total payable',
                       cents: widget.cart.subtotalCents,
                       bold: true,
@@ -155,101 +209,6 @@ class _CheckoutPageState extends State<CheckoutPage> {
                     ? const CircularProgressIndicator()
                     : const Text('Place order'),
               ),
-            ),
-          ],
-        ),
-      ),
-    ),
-  );
-}
-
-class OrderConfirmationPage extends StatelessWidget {
-  const OrderConfirmationPage({
-    super.key,
-    required this.order,
-    required this.api,
-  });
-  final GroceryOrder order;
-  final ApiClient api;
-  @override
-  Widget build(BuildContext context) => Scaffold(
-    appBar: AppBar(title: const Text('Order placed')),
-    body: Center(
-      child: ConstrainedBox(
-        constraints: const BoxConstraints(maxWidth: 560),
-        child: ListView(
-          padding: const EdgeInsets.all(24),
-          children: [
-            const Icon(Icons.check_circle_outline, size: 64, color: _green),
-            const SizedBox(height: 18),
-            Text(
-              'Your order is in.',
-              textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.headlineSmall
-                  ?.copyWith(fontWeight: FontWeight.w700),
-            ),
-            const SizedBox(height: 8),
-            Text(
-              'Order ${order.id}',
-              textAlign: TextAlign.center,
-              style: const TextStyle(color: _muted),
-            ),
-            const SizedBox(height: 24),
-            Card(
-              child: Padding(
-                padding: const EdgeInsets.all(18),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Delivery address',
-                      style: Theme.of(context).textTheme.titleSmall
-                          ?.copyWith(fontWeight: FontWeight.w700),
-                    ),
-                    const SizedBox(height: 6),
-                    Text(order.address),
-                    const Divider(height: 28),
-                    ...order.items.map(
-                      (item) => Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 4),
-                        child: Text('${item['quantity']} × ${item['name']}'),
-                      ),
-                    ),
-                    const Divider(height: 28),
-                    _MoneyRow(
-                      label: 'Total',
-                      cents: order.totalCents,
-                      bold: true,
-                    ),
-                    const SizedBox(height: 10),
-                    Text(
-                      'Status: ${_statusLabel(order.status)}',
-                      style: const TextStyle(
-                        color: _green,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            const SizedBox(height: 16),
-            SizedBox(
-              width: double.infinity,
-              child: FilledButton(
-                onPressed: () => Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                    builder: (_) => TrackingPage(order: order, api: api),
-                  ),
-                ),
-                child: const Text('Track this order'),
-              ),
-            ),
-            TextButton(
-              onPressed: () =>
-                  Navigator.popUntil(context, (route) => route.isFirst),
-              child: const Text('Back to groceries'),
             ),
           ],
         ),

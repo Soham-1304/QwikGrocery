@@ -1,13 +1,20 @@
 # Local macOS metadata
 .DS_Store
+.agents/
 
-# QuickGrocery API credentials and generated files
+# QwikGrocery API credentials and generated files
 QuickGroceryAPI/.env
 QuickGroceryAPI/secrets/
 QuickGroceryAPI/node_modules/
 
 # Flutter generated files
-QuickGroceryApp/.dart_tool/
+**/.dart_tool/
+**/.dart-tool/
+**/.dartServer/
+**/build/
 QuickGroceryApp/.flutter-plugins-dependencies
-QuickGroceryApp/build/
+QuickGroceryApp/.flutter-plugins
 QuickGroceryApp/android/local.properties
+QuickGroceryApp/.pub-cache/
+QuickGroceryApp/.pub/
+*.log

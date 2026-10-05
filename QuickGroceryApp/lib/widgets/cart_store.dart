@@ -1,7 +1,11 @@
-part of '../ui.dart';
+import 'package:flutter/foundation.dart';
 
+import '../models.dart';
+
+/// Legacy ChangeNotifier store managing cart line items.
 class CartStore extends ChangeNotifier {
   final Map<String, CartLine> _items = {};
+
   List<CartLine> get items => _items.values.toList(growable: false);
   int get count => _items.values.fold(0, (sum, line) => sum + line.quantity);
   int get subtotalCents =>

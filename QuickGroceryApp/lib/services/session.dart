@@ -10,17 +10,29 @@ class SessionController extends ChangeNotifier {
   SessionController({FirebaseAuth? auth})
     : _auth = auth ?? FirebaseAuth.instance {
     _authSubscription = _auth.authStateChanges().listen(
-      (_) => notifyListeners(),
+      (_) {
+        _isInitialized = true;
+        notifyListeners();
+      },
     );
   }
 
   final FirebaseAuth _auth;
   late final StreamSubscription<User?> _authSubscription;
+  bool _isInitialized = false;
 
+  bool get isInitialized => _isInitialized;
   bool get signedIn => _auth.currentUser != null;
+  String? get uid => _auth.currentUser?.uid;
   String? get email => _auth.currentUser?.email;
 
   Future<String?> get token async => _auth.currentUser?.getIdToken();
+  Future<bool> get isStaff async {
+    final user = _auth.currentUser;
+    if (user == null) return false;
+    final result = await user.getIdTokenResult(true);
+    return result.claims?['staff'] == true;
+  }
 
   Future<void> register(
     String name,

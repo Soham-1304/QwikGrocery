@@ -1,10 +1,5 @@
-import 'product.dart';
+import 'cart_item.dart';
+export 'cart_item.dart';
 
-class CartLine {
-  const CartLine({required this.product, required this.quantity});
-  final Product product;
-  final int quantity;
-  int get totalCents => product.priceCents * quantity;
-  CartLine withQuantity(int value) =>
-      CartLine(product: product, quantity: value);
-}
+/// Backward-compatible alias for [CartItem].
+typedef CartLine = CartItem;

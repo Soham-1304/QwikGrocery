@@ -1,5 +1,5 @@
-name: quick_grocery_app
-description: "QuickGrocery customer application"
+name: qwik_grocery_app
+description: "QwikGrocery customer application"
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
@@ -34,6 +34,8 @@ dependencies:
   firebase_auth: ^5.5.1
   google_sign_in: ^6.2.2
   http: ^1.6.0
+  flutter_map: ^8.3.2
+  latlong2: ^0.10.1
 
 dev_dependencies:
   flutter_test:

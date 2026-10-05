@@ -1,5 +1,5 @@
 {
-  "name": "quick-grocery-api",
+  "name": "qwik-grocery-api",
   "version": "1.0.0",
   "private": true,
   "type": "module",
@@ -7,7 +7,9 @@
   "scripts": {
     "start": "node src/server.js",
     "dev": "node --watch src/server.js",
-    "seed:products": "node scripts/seedProducts.js"
+    "seed:products": "node scripts/seedProducts.js",
+    "staff:claim": "node scripts/setStaffClaim.js",
+    "staff:setup": "node scripts/createStaffUser.js"
   },
   "dependencies": {
     "cors": "^2.8.5",

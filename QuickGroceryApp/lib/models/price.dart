@@ -1,1 +1,1 @@
-String money(int cents) => '₹${(cents / 100).toStringAsFixed(2)}';
+export '../core/utils/currency_formatter.dart' show money;

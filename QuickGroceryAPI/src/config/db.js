@@ -1,7 +1,7 @@
 import { createRequire } from 'node:module';
 import { cert, getApps, initializeApp } from 'firebase-admin/app';
 import { getAuth } from 'firebase-admin/auth';
-import { FieldValue, getFirestore } from 'firebase-admin/firestore';
+import { FieldValue, Timestamp, getFirestore } from 'firebase-admin/firestore';
 
 const projectId = process.env.FIREBASE_PROJECT_ID;
 const require = createRequire(import.meta.url);
@@ -13,4 +13,4 @@ if (getApps().length === 0) {
 
 export const auth = getAuth();
 export const db = getFirestore();
-export { FieldValue };
+export { FieldValue, Timestamp };

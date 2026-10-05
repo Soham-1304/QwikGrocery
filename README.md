@@ -1,87 +1,154 @@
-# QuickGrocery
+# QwikGrocery (Problem Statement 85)
 
-QuickGrocery is split into two independent projects:
+[![Flutter](https://img.shields.io/badge/Flutter-3.35+-02569B?logo=flutter&logoColor=white)](https://flutter.dev)
+[![Material 3](https://img.shields.io/badge/Material_3-Supported-green)](https://m3.material.io)
+[![Express.js](https://img.shields.io/badge/Express-4.x-black?logo=express)](https://expressjs.com)
+[![Firebase](https://img.shields.io/badge/Firebase-Auth_%26_Firestore-FFCA28?logo=firebase&logoColor=black)](https://firebase.google.com)
 
-- `QuickGroceryApp` is the Flutter customer app for Android, iOS, and web.
-- `QuickGroceryAPI` is the Express API. Flutter uses Firebase Authentication directly; Express verifies Firebase ID tokens with the Admin SDK and is the only application service that accesses Firestore.
+**QwikGrocery** is a comprehensive, production-grade quick-commerce grocery delivery system built in accordance with **Problem Statement 85**. It provides a centralized interface for instant product discovery, shopping cart management, real-time animated delivery route tracking, wallet auto-debits, and recurring scheduled orders.
 
-The Firestore `products` collection is seeded with 56 sourced Indian grocery listings across 13 categories, including vegetables, fruits, 15 biscuit/snack choices, instant noodles and soup, pulses and lentils, dahi, milk, bread, and eggs, with large product photos, brands, pack sizes, retailer source links, and regional search aliases. Prices are retailer listing snapshots checked on 2026-10-02 and may vary by date and location. Starting stock counts are explicitly demo inventory and must be replaced with live inventory before accepting real orders. The catalog seed does not create customer accounts, orders, or delivery events.
+---
 
-## Project layout
+## Architecture Overview
+
+The system is organized into two independent sub-projects:
+
+1. **`QuickGroceryApp/`**: Responsive client application built with **Flutter (Material 3)** targeting Android, iOS, and Web.
+   - Clean state management using `CartController` / `CartScope` with zero mock data on the frontend.
+   - Direct Firebase Authentication (Email/Password & Google Sign-in) with automatic session recovery.
+   - Live stream polling and reactive lifecycle updates.
+2. **`QuickGroceryAPI/`**: REST API built with **Node.js, Express, and Firebase Admin SDK**.
+   - Verified bearer authentication via Firebase ID tokens.
+   - Atomic Firestore transactions for stock validation, cart checkout, wallet debits, and scheduled orders.
+   - Background lifecycle runner advancing orders through:
+     $$\text{placed} \xrightarrow{\text{4s}} \text{confirmed} \xrightarrow{\text{6s}} \text{preparing} \xrightarrow{\text{6s}} \text{out\_for\_delivery} \xrightarrow{\text{12s}} \text{delivered}$$
+   - Background scheduler processing active recurring subscriptions every 30 seconds.
+
+---
+
+## Features & Problem Statement Alignment
+
+| PS 85 Objective | Implemented Solution |
+|---|---|
+| **Grocery Dashboard** | Blinkit-style dashboard with dynamic 10-minute delivery ETA pill, saved address selector, clickable deals carousel, shop-by-category rail, and responsive product grid. |
+| **Product Discovery & Search** | Full-text search with regional Hindi/Marathi aliases (e.g., *batata*, *dhaniya*, *aata*) and typo tolerance, category filters, and product details with image gallery and pack sizes. |
+| **Cart & Checkout** | Global cart badge, interactive quantity steppers, bill tally (subtotal, delivery fee, platform fee), address selector, and dual payment support (**QwikWallet** demo balance and Cash on Delivery). |
+| **Delivery Tracking** | Live step-by-step order progression (`placed` $\rightarrow$ `delivered`), color-coded status badges, compact order IDs, order itemization cards, and interactive OpenStreetMap with route highlight following Kharghar’s street grid. |
+| **Schedule / Recurring Orders** | Complete recurring subscription management: daily/weekly/biweekly/monthly intervals, time-of-day selection, wallet auto-pay, pause/reactivate toggle with greyed-out visual indicator, and deletion confirmation dialog. |
+| **QwikWallet Ledger** | In-app demo digital wallet supporting simulated instant top-ups, transaction ledger history, and automatic scheduled order deductions. |
+| **Staff Order Management** | Dedicated role-based staff dashboard accessible only to users with the `staff: true` custom claim to monitor and advance live orders across the hub. |
+
+---
+
+## Project Structure
 
 ```text
-QuickGroceryAPI/
-  data/catalog.seed.json
-  scripts/seedProducts.js
-  src/
-    config/db.js
-    middleware/auth.js
-    models/{Order,Product,Subscription}.js
-    router/{orderRouter,productRouter,subscriptionRouter}.js
-    utils/http.js
-    app.js
-    server.js
-QuickGroceryApp/lib/
-  models/
-  screens/{auth,cart,catalog,checkout,home,orders,products,store,subscriptions}/
-  services/
-  widgets/
+Flutter_Sem_Project/
+├── PS.md                             # Problem Statement 85 specifications
+├── README.md                         # Project documentation and setup guide
+├── QuickGroceryAPI/                  # Backend Express REST API
+│   ├── data/catalog.seed.json        # 56 authentic Indian grocery listings
+│   ├── scripts/
+│   │   ├── seedProducts.js           # Firestore catalog seeder
+│   │   ├── createStaffUser.js        # Dedicated staff account provisioning
+│   │   └── setStaffClaim.js          # Admin custom claim manager
+│   ├── src/
+│   │   ├── config/db.js              # Firebase Admin SDK & Firestore initialization
+│   │   ├── middleware/auth.js        # Token verification & staff guard
+│   │   ├── models/                   # Schema references (Order, Product, Subscription, Wallet)
+│   │   ├── router/                   # Express routes (orders, products, profile, subscriptions, wallet)
+│   │   ├── services/                 # Order lifecycle runner & subscription scheduler
+│   │   ├── app.js                    # Express app configuration & CORS
+│   │   └── server.js                 # Server entry point & startup reconciler
+│   └── package.json
+└── QuickGroceryApp/                  # Frontend Flutter Application
+    ├── lib/
+    │   ├── components/               # Reusable UI widgets (ProductCard, DealsCarousel, CategoryRail, etc.)
+    │   ├── core/theme/               # Material 3 colors, typography, and styling
+    │   ├── models/                   # Dart data models with JSON serialization
+    │   ├── screens/
+    │   │   ├── auth/                 # Sign-in & registration
+    │   │   ├── cart/                 # Shopping cart view & quantity adjustments
+    │   │   ├── catalog/              # Search & category browsing
+    │   │   ├── checkout/             # Order confirmation & payment
+    │   │   ├── home/                 # Grocery dashboard
+    │   │   ├── orders/               # Order history & live delivery tracking
+    │   │   ├── products/             # Product detail pages
+    │   │   ├── profile/              # Customer profile & saved addresses
+    │   │   ├── staff/                # Staff-only fulfillment dashboard
+    │   │   ├── store/                # Responsive root shell (Rail & BottomNav)
+    │   │   ├── subscriptions/        # Schedule recurring orders
+    │   │   └── wallet/               # QwikWallet top-up & ledger
+    │   ├── services/                 # API client & session manager
+    │   └── main.dart                 # Application entry point
+    └── pubspec.yaml
 ```
 
-Flutter screen files share the app's UI library so the existing navigation and private shared components stay consistent, while each screen now lives in a feature folder. Models are separated by data type.
+---
 
-## Setup
+## Setup & Running Locally
 
-1. Create a Firebase project, enable Email/Password sign-in, and create a Firestore database.
-2. The supplied service account has been copied to `QuickGroceryAPI/secrets/ServiceAccountKey.json`; `QuickGroceryAPI/src/config/db.js` loads it with Firebase Admin `cert()` and initializes Firestore. The original Downloads file is unchanged. `.env` sets project ID `qwikgrocery-22631`. Both the key file and `.env` are ignored by Git.
-3. Flutter initializes Firebase from `QuickGroceryApp/lib/firebase_options.dart` using the supplied QuickGrocery web app configuration. Enable Email/Password and Google under Firebase Authentication sign-in providers if using both sign-in methods. Firebase client configuration is public app configuration; the service-account key remains backend-only.
-4. Deploy `QuickGroceryAPI/firestore.rules`; the app accesses Firestore only through the Admin SDK in Express. Firebase Auth signs users in from Flutter and sends ID tokens to Express, which verifies them with Admin SDK.
-5. Seed the catalog (stable document IDs; rerunning safely adds missing records and leaves existing inventory untouched):
+### 1. Prerequisites
+- **Flutter SDK**: 3.35.x or higher
+- **Node.js**: v18.x or higher
+- **Firebase Account**: with Firestore & Authentication enabled
 
-   ```sh
-   cd QuickGroceryAPI
-   npm run seed:products
-   ```
+### 2. Backend API Setup
+```bash
+cd QuickGroceryAPI
 
-   Rerunning with `npm run seed:products -- --overwrite` refreshes sourced fields on those seed IDs. This also deactivates the original generic Unsplash starter records while retaining their Firestore documents for historical references. Catalog records include `brand`, `unit`, `aliases`, and `sourceUrl` alongside `name`, `category`, `priceCents` (integer paise), `imageUrl`, `description`, and `stock`. Search accepts regional names such as `batata`, `dhaniya`, and `aata`, plus common typing errors. There is no product-admin screen in this phase.
-6. Start the API:
+# Install dependencies
+npm install
 
-   ```sh
-   cd QuickGroceryAPI
-   npm install
-   npm run dev
-   ```
+# Seed the 56 authentic catalog products into Firestore
+npm run seed:products
 
-7. Resolve Flutter packages, then start the app with an API URL appropriate for the target device. Example for a local web session:
+# (Optional) Provision demo staff user
+npm run staff:setup
 
-   ```sh
-   cd QuickGroceryApp
-   flutter pub get
-   flutter run -d chrome \
-     --dart-define=API_BASE_URL=http://localhost:4000/api
-   ```
+# Start API server on http://localhost:4000
+npm run dev
+```
 
-   Firebase Auth handles email/password and Google sign-in, persistence, and token refresh in Flutter. Protected API requests send a Firebase ID token to Express. Use a host-reachable API URL instead of `localhost` on a physical device. The provided Firebase options are for the web app; register/configure Android and iOS apps in Firebase before releasing native builds.
+### 3. Frontend App Setup
+```bash
+cd QuickGroceryApp
 
-8. Delivery status changes are accepted only from Firebase users with the `staff: true` custom claim. The API exposes `PATCH /api/orders/:id/status`; no staff interface is part of the customer app. Tracking refreshes the persisted status on demand. No location or map is fabricated.
+# Get Flutter packages
+flutter pub get
 
-Use HTTPS for deployed API traffic. The web API origin must also be allowed by `ALLOWED_ORIGINS`.
+# Run on Web (Chrome)
+flutter run -d chrome --dart-define=API_BASE_URL=http://localhost:4000/api
 
-## API contract
+# Or build release for Web
+flutter build web --no-tree-shake-icons
+```
 
-All API routes use the `/api` prefix. Errors have the shape `{ "error": "..." }`. Protected routes require `Authorization: Bearer <Firebase ID token>`.
+---
 
-| Route | Access | Request / response |
-|---|---|---|
-| `GET /health` | Public | Service health. |
-| `GET /products?search=&category=&available=` | Public | List of active products; filters are optional. |
-| `GET /products/:id` | Public | One active product, or `404`. |
-| `GET /orders` | Signed in | Current customer’s orders. |
-| `POST /orders` | Signed in | `{items:[{productId,quantity}],customerName,phone,address}` → created order. Prices and stock are read from Firestore in a transaction. |
-| `GET /orders/:id` | Order owner | Order and persisted delivery status. |
-| `PATCH /orders/:id/status` | Staff claim | `{status}` with `placed`, `confirmed`, `preparing`, `out_for_delivery`, `delivered`, or `cancelled`. Status cannot move backwards. |
-| `GET /subscriptions` | Signed in | Current customer’s recurring orders. |
-| `POST /subscriptions` | Signed in | `{productId,quantity,frequency,startDate,deliveryTime}`. |
-| `PATCH /subscriptions/:id` | Owner | Update schedule/product/quantity or `{active:boolean}` to pause/reactivate. |
+## API Specification
 
-Order and subscription records are owned by the authenticated Firebase UID. Order creation checks current stock and decrements inventory atomically; the server calculates totals from Firestore prices.
+All routes are prefixed with `/api`. Protected routes require `Authorization: Bearer <Firebase_ID_Token>`.
+
+| Method | Endpoint | Access | Description |
+|---|---|---|---|
+| `GET` | `/health` | Public | Health check (`{"status":"ok"}`). |
+| `GET` | `/products` | Public | Catalog listing with optional `search`, `category`, and `available` filters. |
+| `GET` | `/products/:id` | Public | Product details. |
+| `GET` | `/orders` | Customer | Order history for current authenticated user. |
+| `POST` | `/orders` | Customer | Places a new order with atomic stock verification and wallet debit. |
+| `GET` | `/orders/:id` | Owner | Order details and live delivery status. |
+| `PATCH` | `/orders/:id/status` | Staff | Updates status (`confirmed`, `preparing`, `out_for_delivery`, `delivered`, `cancelled`). |
+| `GET` | `/orders/staff` | Staff | Latest orders for fulfillment dashboard. |
+| `GET` | `/wallet` | Customer | Current wallet balance and transaction ledger. |
+| `POST` | `/wallet/topups` | Customer | Simulated top-up of demo credits. |
+| `GET` | `/subscriptions` | Customer | List of scheduled/recurring orders. |
+| `POST` | `/subscriptions` | Customer | Creates a new recurring schedule with frequency and start time. |
+| `PATCH` | `/subscriptions/:id` | Owner | Edits schedule or toggles `{active: boolean}` to pause/reactivate. |
+| `DELETE`| `/subscriptions/:id` | Owner | Permanently deletes a scheduled recurring order. |
+
+---
+
+## License & Attribution
+- OpenStreetMap map tiles are used for demo delivery routing under the Open Database License.
+- Sourced Indian grocery imagery and metadata are used for educational academic demonstration purposes.

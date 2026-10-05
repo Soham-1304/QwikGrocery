@@ -1,33 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 
+import 'core/theme/app_colors.dart';
+import 'core/theme/app_theme.dart';
 import 'firebase_options.dart';
+import 'screens/auth/auth_page.dart';
+import 'screens/staff/staff_orders_page.dart';
+import 'screens/store/store_shell.dart';
 import 'services/api_client.dart';
 import 'services/session.dart';
-import 'ui.dart';
-
-const _green = Color(0xFF2E6B45);
-const _deepGreen = Color(0xFF17452B);
-const _yellow = Color(0xFFF2C84B);
-const _black = Color(0xFF171A17);
-const _paper = Color(0xFFFAFBF8);
-const _paleGreen = Color(0xFFE9F1E9);
-const _paleYellow = Color(0xFFFFF4CF);
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  runApp(const QuickGroceryApp());
+  runApp(const QwikGroceryApp());
 }
 
-class QuickGroceryApp extends StatefulWidget {
-  const QuickGroceryApp({super.key});
+class QwikGroceryApp extends StatefulWidget {
+  const QwikGroceryApp({super.key});
 
   @override
-  State<QuickGroceryApp> createState() => _QuickGroceryAppState();
+  State<QwikGroceryApp> createState() => _QwikGroceryAppState();
 }
 
-class _QuickGroceryAppState extends State<QuickGroceryApp> {
+class _QwikGroceryAppState extends State<QwikGroceryApp> {
   late final SessionController session;
   late final ApiClient api;
 
@@ -46,86 +42,89 @@ class _QuickGroceryAppState extends State<QuickGroceryApp> {
 
   @override
   Widget build(BuildContext context) => MaterialApp(
-    title: 'QuickGrocery',
+    title: 'QwikGrocery',
     debugShowCheckedModeBanner: false,
-    theme: ThemeData(
-      useMaterial3: true,
-      colorScheme:
-          ColorScheme.fromSeed(
-            seedColor: _green,
-            surface: Colors.white,
-          ).copyWith(
-            primary: _green,
-            onPrimary: Colors.white,
-            primaryContainer: _paleGreen,
-            onPrimaryContainer: _deepGreen,
-            secondary: _yellow,
-            onSecondary: _black,
-            secondaryContainer: _paleYellow,
-            onSecondaryContainer: _black,
-            surface: Colors.white,
-            onSurface: _black,
-            outline: const Color(0xFFDCE4DC),
-          ),
-      scaffoldBackgroundColor: _paper,
-      appBarTheme: const AppBarTheme(
-        backgroundColor: _paper,
-        foregroundColor: _black,
-        surfaceTintColor: Colors.transparent,
-        elevation: 0,
-      ),
-      cardTheme: CardThemeData(
-        color: Colors.white,
-        elevation: 0,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10),
-          side: const BorderSide(color: Color(0xFFDCE4DC)),
-        ),
-      ),
-      inputDecorationTheme: InputDecorationTheme(
-        filled: true,
-        fillColor: Colors.white,
-        contentPadding: const EdgeInsets.symmetric(
-          horizontal: 14,
-          vertical: 13,
-        ),
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8),
-          borderSide: const BorderSide(color: Color(0xFFDCE4DC)),
-        ),
-      ),
-      filledButtonTheme: FilledButtonThemeData(
-        style: FilledButton.styleFrom(
-          backgroundColor: _green,
-          foregroundColor: Colors.white,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-          padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 14),
-        ),
-      ),
-      floatingActionButtonTheme: const FloatingActionButtonThemeData(
-        backgroundColor: _yellow,
-        foregroundColor: _black,
-      ),
-      navigationBarTheme: const NavigationBarThemeData(
-        backgroundColor: Colors.white,
-        indicatorColor: _paleYellow,
-        surfaceTintColor: Colors.transparent,
-      ),
-      chipTheme: ChipThemeData(
-        backgroundColor: _paleGreen,
-        selectedColor: _yellow,
-        side: BorderSide.none,
-        labelStyle: const TextStyle(color: _deepGreen),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(7)),
-      ),
-      visualDensity: VisualDensity.standard,
-    ),
+    theme: AppTheme.lightTheme,
     home: AnimatedBuilder(
       animation: session,
-      builder: (context, _) => session.signedIn
-          ? StoreShell(session: session, api: api)
-          : AuthPage(session: session),
+      builder: (_, __) {
+        if (!session.isInitialized) {
+          return const Scaffold(
+            backgroundColor: AppColors.surface,
+            body: Center(
+              child: CircularProgressIndicator(
+                color: AppColors.emeraldPrimary,
+              ),
+            ),
+          );
+        }
+        return session.signedIn
+            ? _AuthRouter(session: session, api: api, key: ValueKey(session.uid))
+            : AuthPage(session: session);
+      },
     ),
+  );
+}
+
+class _AuthRouter extends StatefulWidget {
+  const _AuthRouter({
+    super.key,
+    required this.session,
+    required this.api,
+  });
+  final SessionController session;
+  final ApiClient api;
+
+  @override
+  State<_AuthRouter> createState() => _AuthRouterState();
+}
+
+class _AuthRouterState extends State<_AuthRouter> {
+  late Future<bool> _staffCheck;
+
+  @override
+  void initState() {
+    super.initState();
+    _staffCheck = widget.session.isStaff;
+  }
+
+  void _retry() => setState(() => _staffCheck = widget.session.isStaff);
+
+  @override
+  Widget build(BuildContext context) => FutureBuilder<bool>(
+    future: _staffCheck,
+    builder: (ctx, snap) {
+      if (snap.connectionState != ConnectionState.done) {
+        return const Scaffold(
+          body: Center(child: CircularProgressIndicator()),
+        );
+      }
+      if (snap.hasError) {
+        return Scaffold(
+          appBar: AppBar(title: const Text('QwikGrocery')),
+          body: Center(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const Text('Could not verify account access.'),
+                const SizedBox(height: 12),
+                FilledButton(
+                  onPressed: _retry,
+                  child: const Text('Retry'),
+                ),
+                TextButton(
+                  onPressed: () => widget.session.signOut(),
+                  child: const Text('Sign out'),
+                ),
+              ],
+            ),
+          ),
+        );
+      }
+      if (snap.data == true) {
+        return StaffOrdersPage(api: widget.api, session: widget.session);
+      }
+      return StoreShell(session: widget.session, api: widget.api);
+    },
   );
 }

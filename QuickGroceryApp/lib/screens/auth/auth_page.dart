@@ -1,4 +1,9 @@
-part of '../../ui.dart';
+import 'package:flutter/material.dart';
+
+import '../../core/theme/app_colors.dart';
+import '../../services/api_exception.dart';
+import '../../services/session.dart';
+import '../../widgets/common_widgets.dart';
 
 class AuthPage extends StatefulWidget {
   const AuthPage({super.key, required this.session});
@@ -33,7 +38,7 @@ class _AuthPageState extends State<AuthPage> {
     } catch (_) {
       setState(
         () => _error =
-            'Can’t reach QuickGrocery. Check the API connection and try again.',
+            'Can’t reach QwikGrocery. Check the API connection and try again.',
       );
     } finally {
       if (mounted) setState(() => _busy = false);
@@ -75,7 +80,7 @@ class _AuthPageState extends State<AuthPage> {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const _BrandMark(),
+                const BrandMark(),
                 const SizedBox(height: 36),
                 Text(
                   _register ? 'Create your account' : 'Welcome back',
@@ -85,9 +90,9 @@ class _AuthPageState extends State<AuthPage> {
                 const SizedBox(height: 8),
                 Text(
                   _register
-                      ? 'Sign up to start your grocery list.'
-                      : 'Sign in to manage your groceries and orders.',
-                  style: const TextStyle(color: _muted),
+                      ? 'Fresh groceries, delivered Qwikly.'
+                      : 'Sign in for groceries delivered Qwikly.',
+                  style: const TextStyle(color: AppColors.textSecondary),
                 ),
                 const SizedBox(height: 28),
                 if (_register) ...[
@@ -165,7 +170,7 @@ class _AuthPageState extends State<AuthPage> {
                   child: Text(
                     _register
                         ? 'Already have an account? Sign in'
-                        : 'New to QuickGrocery? Create account',
+                        : 'New to QwikGrocery? Create account',
                   ),
                 ),
               ],

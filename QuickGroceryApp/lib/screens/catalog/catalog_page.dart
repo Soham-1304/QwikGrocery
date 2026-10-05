@@ -1,5 +1,18 @@
-part of '../../ui.dart';
+import 'dart:async';
 
+import 'package:flutter/material.dart';
+
+import '../../components/product_card.dart';
+import '../../core/theme/app_colors.dart';
+import '../../models/product.dart';
+import '../../services/api_client.dart';
+import '../../state/cart_controller.dart';
+import '../../state/cart_scope.dart';
+import '../products/product_detail_page.dart';
+import 'widgets/catalog_filter_bar.dart';
+import 'widgets/catalog_sort_sheet.dart';
+
+/// Blinkit-style product catalog with sticky search, category chips, sort sheet.
 class CatalogPage extends StatefulWidget {
   const CatalogPage({
     super.key,
@@ -8,8 +21,9 @@ class CatalogPage extends StatefulWidget {
     this.initialCategory = '',
   });
   final ApiClient api;
-  final CartStore cart;
+  final CartController cart;
   final String initialCategory;
+
   @override
   State<CatalogPage> createState() => _CatalogPageState();
 }
@@ -19,6 +33,7 @@ class _CatalogPageState extends State<CatalogPage> {
   Timer? _debounce;
   late String _category;
   bool _availableOnly = false;
+  SortOrder _sort = SortOrder.none;
   late Future<List<Product>> _products;
   late Future<List<String>> _categories;
 
@@ -32,22 +47,45 @@ class _CatalogPageState extends State<CatalogPage> {
     );
   }
 
-  Future<List<Product>> _load() async {
-    return widget.api.products(
-      search: _search.text,
-      category: _category,
-      available: _availableOnly ? true : null,
-    );
-  }
+  Future<List<Product>> _load() => widget.api.products(
+    search: _search.text.trim(),
+    category: _category,
+    available: _availableOnly ? true : null,
+  );
 
-  void _refresh() {
-    setState(() {
-      _products = _load();
-    });
-  }
-  void _searchChanged(String _) {
+  void _refresh() => setState(() => _products = _load());
+
+  void _onSearch(String _) {
     _debounce?.cancel();
     _debounce = Timer(const Duration(milliseconds: 280), _refresh);
+  }
+
+  Future<void> _showSortSheet() async {
+    final picked = await showModalBottomSheet<SortOrder>(
+      context: context,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (_) => CatalogSortSheet(current: _sort),
+    );
+    if (picked != null && picked != _sort) {
+      setState(() => _sort = picked);
+    }
+  }
+
+  List<Product> _sorted(List<Product> products) {
+    final list = [...products];
+    switch (_sort) {
+      case SortOrder.priceLow:
+        list.sort((a, b) => a.priceCents.compareTo(b.priceCents));
+      case SortOrder.priceHigh:
+        list.sort((a, b) => b.priceCents.compareTo(a.priceCents));
+      case SortOrder.discount:
+        list.sort((a, b) => b.discountPercentage.compareTo(a.discountPercentage));
+      case SortOrder.none:
+        break;
+    }
+    return list;
   }
 
   @override
@@ -58,127 +96,141 @@ class _CatalogPageState extends State<CatalogPage> {
   }
 
   @override
-  Widget build(BuildContext context) => ListView(
-    padding: const EdgeInsets.all(20),
-    children: [
-      Wrap(
-        spacing: 12,
-        runSpacing: 10,
-        crossAxisAlignment: WrapCrossAlignment.center,
+  Widget build(BuildContext context) {
+    return CartScope(
+      controller: widget.cart,
+      child: Column(
         children: [
-          SizedBox(
-            width: 330,
-            child: TextField(
-              controller: _search,
-              onChanged: _searchChanged,
-              decoration: const InputDecoration(
-                prefixIcon: Icon(Icons.search),
-                hintText: 'Search potato, batata, dhaniya…',
-                isDense: true,
-              ),
+          CatalogFilterBar(
+            searchController: _search,
+            onSearchChanged: _onSearch,
+            onSortTap: _showSortSheet,
+            sortActive: _sort != SortOrder.none,
+            categoriesFuture: _categories,
+            selectedCategory: _category,
+            availableOnly: _availableOnly,
+            onCategoryChanged: (cat) => setState(() {
+              _category = cat;
+              _products = _load();
+            }),
+            onAvailableToggle: (val) => setState(() {
+              _availableOnly = val;
+              _products = _load();
+            }),
+          ),
+          Expanded(
+            child: FutureBuilder<List<Product>>(
+              future: _products,
+              builder: (ctx, snap) {
+                if (snap.connectionState == ConnectionState.waiting &&
+                    !snap.hasData) {
+                  return const Center(child: CircularProgressIndicator());
+                }
+                if (snap.hasError) {
+                  return Center(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        const Icon(
+                          Icons.cloud_off_outlined,
+                          size: 40,
+                          color: AppColors.textTertiary,
+                        ),
+                        const SizedBox(height: 12),
+                        const Text('Couldn\'t load catalog'),
+                        const SizedBox(height: 8),
+                        TextButton.icon(
+                          onPressed: _refresh,
+                          icon: const Icon(Icons.refresh),
+                          label: const Text('Try again'),
+                        ),
+                      ],
+                    ),
+                  );
+                }
+                final products = _sorted(snap.data ?? []);
+                if (products.isEmpty) {
+                  return const _EmptyResults();
+                }
+                return _ProductGrid(
+                  products: products,
+                  cart: widget.cart,
+                );
+              },
             ),
-          ),
-          FutureBuilder<List<String>>(
-            future: _categories,
-            builder: (context, snapshot) {
-              final categories = snapshot.data ?? const <String>[];
-              final selected =
-                  _category.isEmpty || categories.contains(_category)
-                  ? _category
-                  : '';
-              return DropdownButton<String>(
-                value: selected,
-                hint: const Text('Category'),
-                items: [
-                  const DropdownMenuItem(
-                    value: '',
-                    child: Text('All categories'),
-                  ),
-                  ...categories.map(
-                    (c) => DropdownMenuItem(value: c, child: Text(c)),
-                  ),
-                ],
-                onChanged: (value) {
-                  setState(() {
-                    _category = value ?? '';
-                    _products = _load();
-                  });
-                },
-              );
-            },
-          ),
-          FilterChip(
-            label: const Text('In stock'),
-            selected: _availableOnly,
-            onSelected: (value) {
-              setState(() {
-                _availableOnly = value;
-                _products = _load();
-              });
-            },
           ),
         ],
       ),
-      Padding(
-        padding: const EdgeInsets.only(top: 7),
-        child: Text(
-          'Regional names and common typos are supported.',
-          style: Theme.of(context).textTheme.bodySmall?.copyWith(color: _muted),
+    );
+  }
+}
+
+class _ProductGrid extends StatelessWidget {
+  const _ProductGrid({
+    required this.products,
+    required this.cart,
+  });
+  final List<Product> products;
+  final CartController cart;
+
+  @override
+  Widget build(BuildContext context) {
+    return GridView.builder(
+      padding: const EdgeInsets.fromLTRB(16, 12, 16, 32),
+      itemCount: products.length,
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: _cols(MediaQuery.sizeOf(context).width),
+        crossAxisSpacing: 12,
+        mainAxisSpacing: 12,
+        childAspectRatio: 0.68,
+      ),
+      itemBuilder: (ctx, i) => ProductCard(
+        product: products[i],
+        onTap: () => Navigator.push(
+          ctx,
+          MaterialPageRoute(
+            builder: (_) => CartScope(
+              controller: cart,
+              child: ProductDetailPage(product: products[i]),
+            ),
+          ),
         ),
       ),
-      const SizedBox(height: 20),
-      FutureBuilder<List<Product>>(
-        future: _products,
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Padding(
-              padding: EdgeInsets.all(40),
-              child: Center(child: CircularProgressIndicator()),
-            );
-          }
-          if (snapshot.hasError) {
-            return _Problem(
-              message: 'Catalog couldn’t load.',
-              onRetry: _refresh,
-            );
-          }
-          final products = snapshot.data ?? [];
-          if (products.isEmpty) {
-            return const _EmptyState(
-              icon: Icons.search_off,
-              title: 'No matching groceries',
-              detail: 'Try another search or clear a filter.',
-            );
-          }
-          return LayoutBuilder(
-            builder: (context, constraints) {
-              final columns = constraints.maxWidth > 1050
-                  ? 4
-                  : constraints.maxWidth > 720
-                  ? 3
-                  : constraints.maxWidth > 430
-                  ? 2
-                  : 1;
-              return GridView.builder(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                itemCount: products.length,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: columns,
-                  crossAxisSpacing: 12,
-                  mainAxisSpacing: 12,
-                  childAspectRatio: columns == 1 ? 2.2 : 0.78,
-                ),
-                itemBuilder: (_, i) => ProductCard(
-                  product: products[i],
-                  cart: widget.cart,
-                  api: widget.api,
-                ),
-              );
-            },
-          );
-        },
-      ),
-    ],
+    );
+  }
+
+  int _cols(double width) {
+    if (width > 1100) return 5;
+    if (width > 800) return 4;
+    if (width > 550) return 3;
+    return 2;
+  }
+}
+
+class _EmptyResults extends StatelessWidget {
+  const _EmptyResults();
+
+  @override
+  Widget build(BuildContext context) => Center(
+    child: Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        const Icon(
+          Icons.search_off_rounded,
+          size: 48,
+          color: AppColors.textTertiary,
+        ),
+        const SizedBox(height: 14),
+        const Text(
+          'No matching groceries',
+          style: TextStyle(fontWeight: FontWeight.w700, fontSize: 16),
+        ),
+        const SizedBox(height: 6),
+        const Text(
+          'Try another search or clear a filter.',
+          style: TextStyle(color: AppColors.textSecondary),
+        ),
+      ],
+    ),
   );
 }
